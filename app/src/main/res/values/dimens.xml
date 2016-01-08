@@ -18,5 +18,7 @@
   <dimen name="default_margin">16dp</dimen>
   <dimen name="super_hero_row_height">200dp</dimen>
   <dimen name="super_hero_row_gradient_height">100dp</dimen>
-  <dimen name="super_hero_detail_header_height">400dp</dimen>
+  <dimen name="super_hero_detail_header_height">300dp</dimen>
+  <dimen name="title_text_size">20dp</dimen>
+  <dimen name="body_text_size">16dp</dimen>
 </resources>

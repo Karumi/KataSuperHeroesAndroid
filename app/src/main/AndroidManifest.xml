@@ -28,7 +28,7 @@
     <activity
         android:label="@string/app_name"
         android:name="com.github.katasuperheroes.ui.view.MainActivity"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -36,9 +36,8 @@
       </intent-filter>
     </activity>
     <activity
-        android:label="@string/title_activity_super_hero_detail"
         android:name="com.github.katasuperheroes.ui.view.SuperHeroDetailActivity"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
     </activity>
   </application>
 
