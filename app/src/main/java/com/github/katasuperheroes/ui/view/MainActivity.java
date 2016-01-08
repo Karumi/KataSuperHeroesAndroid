@@ -25,10 +25,13 @@ import github.com.katasuperheroes.R;
 
 public class MainActivity extends AppCompatActivity {
 
+  private SuperHeroesAdapter adapter;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
     initializeToolbar();
+    initializeAdapter();
     initializeRecyclerView();
   }
 
@@ -37,9 +40,14 @@ public class MainActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
   }
 
+  private void initializeAdapter() {
+    adapter = new SuperHeroesAdapter();
+  }
+
   private void initializeRecyclerView() {
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setHasFixedSize(true);
+    recyclerView.setAdapter(adapter);
   }
 }
