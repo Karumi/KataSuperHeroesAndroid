@@ -3,9 +3,8 @@ apply plugin: 'com.android.application'
 android {
   compileSdkVersion 23
   buildToolsVersion "23.0.2"
-
   defaultConfig {
-    applicationId "github.com.katasuperheros"
+    applicationId 'github.com.katasuperheroes'
     minSdkVersion 16
     targetSdkVersion 23
     versionCode 1
@@ -17,6 +16,7 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+  productFlavors {}
 }
 
 dependencies {

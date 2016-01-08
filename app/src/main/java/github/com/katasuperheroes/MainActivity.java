@@ -1,4 +1,4 @@
-package github.com.katasuperheros;
+package github.com.katasuperheroes;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

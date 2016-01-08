@@ -1,4 +1,4 @@
-package github.com.katasuperheros;
+package github.com.katasuperheroes;
 
 import org.junit.Test;
 
