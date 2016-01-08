@@ -14,9 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
-  <dimen name="super_hero_row_height">200dp</dimen>
-  <dimen name="super_hero_row_gradient_height">100dp</dimen>
-</resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+  <gradient
+      android:startColor="@android:color/black"
+      android:endColor="@android:color/transparent"
+      android:angle="90"/>
+  <corners
+      android:radius="0dp"/>
+</shape>

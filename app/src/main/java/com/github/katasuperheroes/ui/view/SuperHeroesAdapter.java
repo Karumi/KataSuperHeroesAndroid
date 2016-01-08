@@ -62,16 +62,19 @@ class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final ImageView photoImageView;
     private final TextView nameTextView;
+    private final View avengersBadgeView;
 
     public SuperHeroViewHolder(View itemView) {
       super(itemView);
       this.photoImageView = (ImageView) itemView.findViewById(R.id.iv_super_hero_photo);
       this.nameTextView = (TextView) itemView.findViewById(R.id.tv_super_hero_name);
+      this.avengersBadgeView = itemView.findViewById(R.id.iv_avengers_badge);
     }
 
     public void render(SuperHero superHero) {
       renderSuperHeroPhoto(superHero.getPhoto());
       renderSuperHeroName(superHero.getName());
+      renderAvengersBadge(superHero.isAvenger());
     }
 
     private void renderSuperHeroPhoto(String photo) {
@@ -80,6 +83,10 @@ class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private void renderSuperHeroName(String name) {
       nameTextView.setText(name);
+    }
+
+    private void renderAvengersBadge(boolean isAvenger) {
+      avengersBadgeView.setVisibility(isAvenger ? View.VISIBLE : View.GONE);
     }
 
     private Context getContext() {
