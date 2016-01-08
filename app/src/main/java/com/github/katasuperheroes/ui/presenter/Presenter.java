@@ -42,9 +42,5 @@ public class Presenter<T extends Presenter.View> {
 
     void hideLoading();
 
-    void showEmptyCase();
-
-    void hideEmptyCase();
-
   }
 }

@@ -16,4 +16,5 @@
   -->
 <resources>
   <string name="app_name">Kata Super Heroes</string>
+  <string name="title_activity_super_hero_detail">SuperHeroDetail</string>
 </resources>

@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.github.katasuperheroes.model.SuperHero;
+import com.github.katasuperheroes.ui.presenter.SuperHeroesPresenter;
 import com.squareup.picasso.Picasso;
 import github.com.katasuperheroes.R;
 import java.util.ArrayList;
@@ -32,20 +33,22 @@ import java.util.List;
 
 class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-  private List<SuperHero> superHeroes = new ArrayList<>();
+  private final SuperHeroesPresenter presenter;
+  private final List<SuperHero> superHeroes;
+
+  public SuperHeroesAdapter(SuperHeroesPresenter presenter) {
+    this.presenter = presenter;
+    this.superHeroes = new ArrayList<>();
+  }
 
   void addAll(Collection<SuperHero> collection) {
     superHeroes.addAll(collection);
   }
 
-  void clear() {
-    superHeroes.clear();
-  }
-
   @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View view =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.super_hero_row, parent, false);
-    return new SuperHeroViewHolder(view);
+    return new SuperHeroViewHolder(view, presenter);
   }
 
   @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -60,21 +63,32 @@ class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private static class SuperHeroViewHolder extends RecyclerView.ViewHolder {
 
+    private final SuperHeroesPresenter presenter;
     private final ImageView photoImageView;
     private final TextView nameTextView;
     private final View avengersBadgeView;
 
-    public SuperHeroViewHolder(View itemView) {
+    public SuperHeroViewHolder(View itemView, SuperHeroesPresenter presenter) {
       super(itemView);
+      this.presenter = presenter;
       this.photoImageView = (ImageView) itemView.findViewById(R.id.iv_super_hero_photo);
       this.nameTextView = (TextView) itemView.findViewById(R.id.tv_super_hero_name);
       this.avengersBadgeView = itemView.findViewById(R.id.iv_avengers_badge);
     }
 
     public void render(SuperHero superHero) {
+      hookListeners(superHero);
       renderSuperHeroPhoto(superHero.getPhoto());
       renderSuperHeroName(superHero.getName());
       renderAvengersBadge(superHero.isAvenger());
+    }
+
+    private void hookListeners(final SuperHero superHero) {
+      itemView.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+          presenter.onSuperHeroClicked(superHero);
+        }
+      });
     }
 
     private void renderSuperHeroPhoto(String photo) {

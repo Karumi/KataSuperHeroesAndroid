@@ -40,17 +40,22 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
+    initializePresenter();
     initializeToolbar();
     initializeLoadingView();
     initializeEmptyCaseView();
     initializeAdapter();
     initializeRecyclerView();
-    initializePresenter();
+    presenter.initialize();
   }
 
   @Override public void showSuperHeroes(List<SuperHero> superHeroes) {
     adapter.addAll(superHeroes);
     adapter.notifyDataSetChanged();
+  }
+
+  @Override public void openSuperHeroScreen(SuperHero superHero) {
+    SuperHeroDetailActivity.open(this, superHero.getName());
   }
 
   @Override public void showLoading() {
@@ -62,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
   }
 
   @Override public void showEmptyCase() {
-
+    emptyCaseView.setVisibility(View.VISIBLE);
   }
 
   @Override public void hideEmptyCase() {
-
+    emptyCaseView.setVisibility(View.GONE);
   }
 
   private void initializeToolbar() {
@@ -83,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
   }
 
   private void initializeAdapter() {
-    adapter = new SuperHeroesAdapter();
+    adapter = new SuperHeroesAdapter(presenter);
   }
 
   private void initializeRecyclerView() {
@@ -98,6 +103,5 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
     GetSuperHeroes getSuperHeroes = new GetSuperHeroes(repository);
     presenter = new SuperHeroesPresenter(getSuperHeroes);
     presenter.setView(this);
-    presenter.initialize();
   }
 }

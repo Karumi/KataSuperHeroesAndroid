@@ -17,44 +17,35 @@
 package com.github.katasuperheroes.ui.presenter;
 
 import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.usecase.GetSuperHeroes;
-import java.util.List;
+import com.github.katasuperheroes.usecase.GetSuperHeroByName;
 
-public class SuperHeroesPresenter extends Presenter<SuperHeroesPresenter.View> {
+public class SuperHeroDetailPresenter extends Presenter<SuperHeroDetailPresenter.View> {
 
-  private final GetSuperHeroes getSuperHeroes;
+  private final GetSuperHeroByName getSuperHeroByName;
 
-  public SuperHeroesPresenter(GetSuperHeroes getSuperHeroes) {
-    this.getSuperHeroes = getSuperHeroes;
+  private String name;
+
+  public SuperHeroDetailPresenter(GetSuperHeroByName getSuperHeroByName) {
+    this.getSuperHeroByName = getSuperHeroByName;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override public void initialize() {
     super.initialize();
-    getSuperHeroes.getAll(new GetSuperHeroes.Callback() {
-      @Override public void onSuperHeroesLoaded(List<SuperHero> superHeroes) {
+    getSuperHeroByName.get(name, new GetSuperHeroByName.Callback() {
+      @Override public void onSuperHeroLoaded(SuperHero superHero) {
         View view = getView();
         view.hideLoading();
-        if (superHeroes.isEmpty()) {
-          view.showEmptyCase();
-        } else {
-          view.showSuperHeroes(superHeroes);
-        }
+        view.showSuperHero(superHero);
       }
     });
   }
 
-  public void onSuperHeroClicked(SuperHero superHero) {
-    getView().openSuperHeroScreen(superHero);
-  }
-
   public interface View extends Presenter.View {
 
-    void showEmptyCase();
-
-    void hideEmptyCase();
-
-    void showSuperHeroes(List<SuperHero> superHeroes);
-
-    void openSuperHeroScreen(SuperHero superHero);
+    void showSuperHero(SuperHero superHero);
   }
 }

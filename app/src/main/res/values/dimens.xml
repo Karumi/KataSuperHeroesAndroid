@@ -15,8 +15,8 @@
   ~ limitations under the License.
   -->
 <resources>
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="default_margin">16dp</dimen>
   <dimen name="super_hero_row_height">200dp</dimen>
   <dimen name="super_hero_row_gradient_height">100dp</dimen>
+  <dimen name="super_hero_detail_header_height">400dp</dimen>
 </resources>

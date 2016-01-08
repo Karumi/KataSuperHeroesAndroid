@@ -13,11 +13,11 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="github.com.katasuperheroes">
 
-  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.INTERNET"/>
 
   <application
       android:allowBackup="true"
@@ -31,8 +31,14 @@
         android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
+
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+    </activity>
+    <activity
+        android:label="@string/title_activity_super_hero_detail"
+        android:name="com.github.katasuperheroes.ui.view.SuperHeroDetailActivity"
+        android:theme="@style/AppTheme.NoActionBar">
     </activity>
   </application>
 
