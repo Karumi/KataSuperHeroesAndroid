@@ -16,31 +16,13 @@
 
 package com.github.katasuperheroes.ui.presenter;
 
-public class Presenter<T extends Presenter.View> {
+import com.github.katasuperheroes.model.SuperHero;
+import java.util.List;
 
-  private T view;
+public class SuperHeroesPresenter extends Presenter<SuperHeroesPresenter.View> {
 
-  public T getView() {
-    return view;
-  }
+  public interface View extends Presenter.View {
 
-  public void initialize() {
-
-  }
-
-  public void update() {
-
-  }
-
-  public interface View {
-
-    void showLoading();
-
-    void hideLoading();
-
-    void showEmptyCase();
-
-    void hideEmptyCase();
-
+    void showSuperHeroes(List<SuperHero> superHeroes);
   }
 }

@@ -21,9 +21,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import com.github.katasuperheroes.model.SuperHero;
+import com.github.katasuperheroes.ui.presenter.SuperHeroesPresenter;
 import github.com.katasuperheroes.R;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SuperHeroesPresenter.View {
 
   private SuperHeroesAdapter adapter;
 
@@ -33,6 +36,26 @@ public class MainActivity extends AppCompatActivity {
     initializeToolbar();
     initializeAdapter();
     initializeRecyclerView();
+  }
+
+  @Override public void showSuperHeroes(List<SuperHero> superHeroes) {
+
+  }
+
+  @Override public void showLoading() {
+
+  }
+
+  @Override public void hideLoading() {
+
+  }
+
+  @Override public void showEmptyCase() {
+
+  }
+
+  @Override public void hideEmptyCase() {
+
   }
 
   private void initializeToolbar() {
