@@ -17,10 +17,12 @@
 package com.github.katasuperheroes.ui.view;
 
 import android.os.Bundle;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import com.github.katasuperheroes.model.SuperHero;
 import com.github.katasuperheroes.model.SuperHeroesRepository;
 import com.github.katasuperheroes.ui.presenter.SuperHeroesPresenter;
@@ -32,11 +34,15 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
 
   private SuperHeroesAdapter adapter;
   private SuperHeroesPresenter presenter;
+  private ContentLoadingProgressBar progressBar;
+  private View emptyCaseView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
     initializeToolbar();
+    initializeLoadingView();
+    initializeEmptyCaseView();
     initializeAdapter();
     initializeRecyclerView();
     initializePresenter();
@@ -48,11 +54,11 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
   }
 
   @Override public void showLoading() {
-
+    progressBar.setVisibility(View.VISIBLE);
   }
 
   @Override public void hideLoading() {
-
+    progressBar.setVisibility(View.GONE);
   }
 
   @Override public void showEmptyCase() {
@@ -66,6 +72,14 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
   private void initializeToolbar() {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+  }
+
+  private void initializeLoadingView() {
+    progressBar = (ContentLoadingProgressBar) findViewById(R.id.progress_bar);
+  }
+
+  private void initializeEmptyCaseView() {
+    emptyCaseView = findViewById(R.id.tv_empty_case);
   }
 
   private void initializeAdapter() {

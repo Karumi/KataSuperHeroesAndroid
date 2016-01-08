@@ -32,7 +32,13 @@ public class SuperHeroesPresenter extends Presenter<SuperHeroesPresenter.View> {
     super.initialize();
     getSuperHeroes.getAll(new GetSuperHeroes.Callback() {
       @Override public void onSuperHeroesLoaded(List<SuperHero> superHeroes) {
-        getView().showSuperHeroes(superHeroes);
+        View view = getView();
+        view.hideLoading();
+        if (superHeroes.isEmpty()) {
+          view.showEmptyCase();
+        } else {
+          view.showSuperHeroes(superHeroes);
+        }
       }
     });
   }

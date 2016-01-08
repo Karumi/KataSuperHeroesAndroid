@@ -28,8 +28,8 @@
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:background="?attr/colorPrimary"
-      app:popupTheme="@style/AppTheme.PopupOverlay"
       android:theme="@style/AppTheme.AppBarOverlay"
+      app:popupTheme="@style/AppTheme.PopupOverlay"
       />
 
   <android.support.v7.widget.RecyclerView
@@ -39,6 +39,24 @@
       android:layout_below="@id/toolbar"
       tools:context="com.github.katasuperheroes.ui.view.MainActivity"
       tools:showIn="@layout/main_activity"
+      />
+
+  <android.support.v4.widget.ContentLoadingProgressBar
+      android:id="@+id/progress_bar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      style="?android:attr/progressBarStyleLarge"
+      />
+
+  <TextView
+      android:id="@+id/tv_empty_case"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="¯\\_(ツ)_/¯"
+      android:layout_centerInParent="true"
+      android:textColor="@android:color/white"
+      android:visibility="gone"
       />
 
 </RelativeLayout>
