@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/super_hero_row_height"
+    >
+
+  <ImageView
+      android:id="@+id/iv_super_hero_photo"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      />
+
+  <TextView
+      android:id="@+id/tv_super_hero_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
 
 </RelativeLayout>

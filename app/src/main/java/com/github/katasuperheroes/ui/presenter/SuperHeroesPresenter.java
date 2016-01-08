@@ -17,9 +17,25 @@
 package com.github.katasuperheroes.ui.presenter;
 
 import com.github.katasuperheroes.model.SuperHero;
+import com.github.katasuperheroes.usecase.GetSuperHeroes;
 import java.util.List;
 
 public class SuperHeroesPresenter extends Presenter<SuperHeroesPresenter.View> {
+
+  private final GetSuperHeroes getSuperHeroes;
+
+  public SuperHeroesPresenter(GetSuperHeroes getSuperHeroes) {
+    this.getSuperHeroes = getSuperHeroes;
+  }
+
+  @Override public void initialize() {
+    super.initialize();
+    getSuperHeroes.getAll(new GetSuperHeroes.Callback() {
+      @Override public void onSuperHeroesLoaded(List<SuperHero> superHeroes) {
+        getView().showSuperHeroes(superHeroes);
+      }
+    });
+  }
 
   public interface View extends Presenter.View {
 

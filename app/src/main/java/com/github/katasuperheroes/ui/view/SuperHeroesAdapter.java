@@ -16,11 +16,15 @@
 
 package com.github.katasuperheroes.ui.view;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.github.katasuperheroes.model.SuperHero;
+import com.squareup.picasso.Picasso;
 import github.com.katasuperheroes.R;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,7 +43,8 @@ class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   }
 
   @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.super_hero_row, null);
+    View view =
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.super_hero_row, parent, false);
     return new SuperHeroViewHolder(view);
   }
 
@@ -55,12 +60,30 @@ class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private static class SuperHeroViewHolder extends RecyclerView.ViewHolder {
 
+    private final ImageView photoImageView;
+    private final TextView nameTextView;
+
     public SuperHeroViewHolder(View itemView) {
       super(itemView);
+      this.photoImageView = (ImageView) itemView.findViewById(R.id.iv_super_hero_photo);
+      this.nameTextView = (TextView) itemView.findViewById(R.id.tv_super_hero_name);
     }
 
     public void render(SuperHero superHero) {
+      renderSuperHeroPhoto(superHero.getPhoto());
+      renderSuperHeroName(superHero.getName());
+    }
 
+    private void renderSuperHeroPhoto(String photo) {
+      Picasso.with(getContext()).load(photo).fit().centerCrop().into(photoImageView);
+    }
+
+    private void renderSuperHeroName(String name) {
+      nameTextView.setText(name);
+    }
+
+    private Context getContext() {
+      return itemView.getContext();
     }
   }
 }

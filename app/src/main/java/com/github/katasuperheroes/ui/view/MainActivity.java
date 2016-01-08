@@ -22,13 +22,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import com.github.katasuperheroes.model.SuperHero;
+import com.github.katasuperheroes.model.SuperHeroesRepository;
 import com.github.katasuperheroes.ui.presenter.SuperHeroesPresenter;
+import com.github.katasuperheroes.usecase.GetSuperHeroes;
 import github.com.katasuperheroes.R;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SuperHeroesPresenter.View {
 
   private SuperHeroesAdapter adapter;
+  private SuperHeroesPresenter presenter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -36,10 +39,12 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
     initializeToolbar();
     initializeAdapter();
     initializeRecyclerView();
+    initializePresenter();
   }
 
   @Override public void showSuperHeroes(List<SuperHero> superHeroes) {
-
+    adapter.addAll(superHeroes);
+    adapter.notifyDataSetChanged();
   }
 
   @Override public void showLoading() {
@@ -72,5 +77,13 @@ public class MainActivity extends AppCompatActivity implements SuperHeroesPresen
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(adapter);
+  }
+
+  private void initializePresenter() {
+    SuperHeroesRepository repository = new SuperHeroesRepository();
+    GetSuperHeroes getSuperHeroes = new GetSuperHeroes(repository);
+    presenter = new SuperHeroesPresenter(getSuperHeroes);
+    presenter.setView(this);
+    presenter.initialize();
   }
 }
