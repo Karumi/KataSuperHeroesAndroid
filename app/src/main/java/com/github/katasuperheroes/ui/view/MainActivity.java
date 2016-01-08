@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes;
+package com.github.katasuperheroes.ui.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
