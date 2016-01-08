@@ -15,7 +15,6 @@
   ~ limitations under the License.
   -->
 <resources>>
-
   <style name="AppTheme.NoActionBar">
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
