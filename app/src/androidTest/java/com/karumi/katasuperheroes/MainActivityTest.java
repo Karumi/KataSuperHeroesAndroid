@@ -35,7 +35,7 @@ import org.mockito.Mock;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class) @LargeTest public class MainActivityTest {
@@ -57,11 +57,11 @@ import static org.mockito.Mockito.when;
 
   @Mock SuperHeroesRepository repository;
 
-  @Test public void test1() {
+  @Test public void showsEmptyCaseIfThereAreNoSuperHeroes() {
     when(repository.getAll()).thenReturn(Collections.<SuperHero>emptyList());
 
     activityRule.launchActivity(null);
 
-    onView(withId(R.id.recycler_view)).check(matches(isDisplayed()));
+    onView(withText("¯\\_(ツ)_/¯")).check(matches(isDisplayed()));
   }
 }
