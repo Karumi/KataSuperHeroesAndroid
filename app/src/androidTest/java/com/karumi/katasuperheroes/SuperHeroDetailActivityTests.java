@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -72,7 +71,7 @@ import static org.mockito.Mockito.when;
 
   @After public void tearDown() {
     List<IdlingResource> idlingResources = getIdlingResources();
-    for (IdlingResource resource: idlingResources) {
+    for (IdlingResource resource : idlingResources) {
       unregisterIdlingResources(resource);
     }
   }
