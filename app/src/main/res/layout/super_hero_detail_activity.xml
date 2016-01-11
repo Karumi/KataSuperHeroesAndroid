@@ -66,6 +66,7 @@
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/default_margin"
             android:src="@mipmap/ic_avengers"
+            android:visibility="gone"
             />
 
       </RelativeLayout>

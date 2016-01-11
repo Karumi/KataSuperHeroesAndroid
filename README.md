@@ -16,16 +16,18 @@ This repository contains an Android application to show Super Heroes information
 
 This Application is based on two Activities:
 
-* ``MainActivity``, showing a list of super heroes with name, photo and a special badge if is part of the Avengers Team.
+* ``MainActivity`` showing a list of super heroes with name, photo and a special badge if is part of the Avengers Team.
 
 ![MainActivityScreenhot][mainActivityScreenshot]
 
-* ``SuperHeroDetailActivity``, showing detailed information for a super hero like the name, photo and description.
+* ``SuperHeroDetailActivity`` showing detailed information for a super hero like the name, photo and description.
 
 ![SuperHeroDetailActivityScreenshot][superHeroDetailActivityScreenshot]
 
 
-**Your task as Android Developer for this kata is to write all the UI tests needed to check if the Application UI is working as should. The application architecture, dependencies and configuration is ready to just start writing tests. In this project you'll find a Dagger2 configured to be able to replace production code with test doubles easily and Espresso to be able to interact with the application user interface.**
+**Your task as Android Developer is to write all the UI tests needed to check if the Application UI is working as should. The application architecture, dependencies and configuration is ready to just start writing tests. In this project you'll find a Dagger2 configured to be able to replace production code with test doubles easily and Espresso to be able to interact with the application user interface.**
+
+This repository is ready to build the application, pass the checkstyle and your tests in Travis-CI environments. **Our recommendation for this exercise is to fork this repository, checkout to the brach project-withtout-tests and start testing the application.**
 
 Before to start, execute the application, explore it manually and review the code to design your test scenarios.
 
@@ -45,6 +47,10 @@ There are some links which can be useful to finish these tasks:
 
 * [Android Testing Support Library official documentation][androidTestingDocumentation]
 * [Espresso Cheat Sheet][espressoCheatSheet]
+* [Espresso Idling Resources][espressoIdlingResources]
+* [Espresso Custom Matchers][espressoCustomMatchers]
+
+Data provided by Marvel. © 2016 MARVEL
 
 #License
 
@@ -71,3 +77,5 @@ limitations under the License.
 [superHeroDetailActivityScreenshot]: ./art/SuperHeroDetailActivityScreenshot.png
 [androidTestingDocumentation]: https://google.github.io/android-testing-support-library
 [espressoCheatSheet]: https://google.github.io/android-testing-support-library/docs/espresso/cheatsheet/index.html
+[espressoIdlingResources]: http://dev.jimdo.com/2014/05/09/wait-for-it-a-deep-dive-into-espresso-s-idling-resources/
+[espressoCustomMatchers]: http://blog.xebia.com/android-custom-matchers-in-espresso/
