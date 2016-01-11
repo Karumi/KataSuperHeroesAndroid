@@ -23,14 +23,18 @@ import android.support.test.espresso.IdlingResource;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
+
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
-import com.karumi.katasuperheroes.idlingresource.WaitForViewVisibleIdlingResource;
+import com.karumi.katasuperheroes.idlingresource.WaitForTextViewWithText;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.ui.view.SuperHeroDetailActivity;
+
 import it.cosenonjaviste.daggermock.DaggerMockRule;
+
 import java.util.List;
+
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -96,9 +100,9 @@ import static org.mockito.Mockito.when;
     SuperHero superHero = givenThereIsASuperHero();
 
     Activity activity = startActivity(superHero);
-    WaitForViewVisibleIdlingResource waitForViewVisible =
-        new WaitForViewVisibleIdlingResource(activity, R.id.tv_super_hero_name);
-    registerIdlingResources(waitForViewVisible);
+    WaitForTextViewWithText waitForTextViewWithText =
+        new WaitForTextViewWithText(activity, R.id.tv_super_hero_name, superHero.getName());
+    registerIdlingResources(waitForTextViewWithText);
 
     onView(allOf(withId(R.id.tv_super_hero_name), withText(superHero.getName()))).check(
         matches(isDisplayed()));
@@ -108,9 +112,10 @@ import static org.mockito.Mockito.when;
     SuperHero superHero = givenThereIsASuperHero();
 
     Activity activity = startActivity(superHero);
-    WaitForViewVisibleIdlingResource waitForViewVisible =
-        new WaitForViewVisibleIdlingResource(activity, R.id.tv_super_hero_description);
-    registerIdlingResources(waitForViewVisible);
+    WaitForTextViewWithText waitForTextViewWithText =
+        new WaitForTextViewWithText(activity, R.id.tv_super_hero_description,
+            superHero.getDescription());
+    registerIdlingResources(waitForTextViewWithText);
 
     onView(withText(superHero.getDescription())).check(matches(isDisplayed()));
   }
