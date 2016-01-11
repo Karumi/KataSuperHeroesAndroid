@@ -30,7 +30,7 @@ import android.view.View;
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
 import com.karumi.katasuperheroes.idlingresource.ViewVisibleIdlingResource;
-import com.karumi.katasuperheroes.idlingresource.WaitForRecyclerViewWithContentIdlingResource;
+import com.karumi.katasuperheroes.idlingresource.RecyclerViewWithContentIdlingResource;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.recyclerview.RecyclerViewInteraction;
@@ -166,8 +166,8 @@ import static org.mockito.Mockito.when;
     List<SuperHero> superHeroes = givenThereAreSomeSuperHeroes();
     int superHeroIndex = 0;
     Activity activity = startActivity();
-    WaitForRecyclerViewWithContentIdlingResource recyclerViewIdlingResource =
-        new WaitForRecyclerViewWithContentIdlingResource(activity, R.id.recycler_view,
+    RecyclerViewWithContentIdlingResource recyclerViewIdlingResource =
+        new RecyclerViewWithContentIdlingResource(activity, R.id.recycler_view,
             superHeroes.size());
 
     Espresso.registerIdlingResources(recyclerViewIdlingResource);

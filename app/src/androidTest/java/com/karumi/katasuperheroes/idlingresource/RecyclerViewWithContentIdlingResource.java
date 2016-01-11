@@ -20,13 +20,13 @@ import android.app.Activity;
 import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.RecyclerView;
 
-public class WaitForRecyclerViewWithContentIdlingResource implements IdlingResource {
+public class RecyclerViewWithContentIdlingResource implements IdlingResource {
 
   private final Activity activity;
   private final int recyclerViewId;
   private final int numberOfItems;
 
-  public WaitForRecyclerViewWithContentIdlingResource(Activity activity, int recyclerViewId,
+  public RecyclerViewWithContentIdlingResource(Activity activity, int recyclerViewId,
       int numberOfItems) {
     this.activity = activity;
     this.recyclerViewId = recyclerViewId;
@@ -34,7 +34,7 @@ public class WaitForRecyclerViewWithContentIdlingResource implements IdlingResou
   }
 
   @Override public String getName() {
-    return "WaitForRecyclerViewWithContentIdlingResource";
+    return "RecyclerViewWithContentIdlingResource";
   }
 
   @Override public boolean isIdleNow() {
