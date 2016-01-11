@@ -10,7 +10,7 @@
 
 ## Tasks
 
-We've developed and Android application to show Super Heroes information:
+This repository contains an Android application to show Super Heroes information:
 
 ![ApplicationScreencast][applicationScreencast]
 
@@ -52,5 +52,5 @@ limitations under the License.
 [dagger2]: http://google.github.io/dagger/
 [testDoubles]: http://www.martinfowler.com/bliki/TestDouble.html
 [applicationScreencast]: ./art/ApplicationScreencast.gif
-[mainActivityScreenshot]: ./MainActivityScreenshot.png
-[superHeroDetailActivityScreenshot]: ./SuperHeroDetailActivityScreenshot.png
+[mainActivityScreenshot]: ./art/MainActivityScreenshot.png
+[superHeroDetailActivityScreenshot]: ./art/SuperHeroDetailActivityScreenshot.png
