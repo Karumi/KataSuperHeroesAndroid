@@ -45,6 +45,7 @@ import static android.support.test.espresso.Espresso.getIdlingResources;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.registerIdlingResources;
 import static android.support.test.espresso.Espresso.unregisterIdlingResources;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -100,6 +101,7 @@ import static org.mockito.Mockito.when;
     SuperHero superHero = givenThereIsASuperHero();
 
     startActivityAndWaitForSuperHeroLoaded(superHero);
+    scrollToView(R.id.tv_super_hero_name);
 
     onView(allOf(withId(R.id.tv_super_hero_name), withText(superHero.getName()))).check(
         matches(isDisplayed()));
@@ -109,6 +111,7 @@ import static org.mockito.Mockito.when;
     SuperHero superHero = givenThereIsASuperHero();
 
     startActivityAndWaitForSuperHeroLoaded(superHero);
+    scrollToView(R.id.tv_super_hero_description);
 
     onView(withText(superHero.getDescription())).check(matches(isDisplayed()));
   }
@@ -156,7 +159,12 @@ import static org.mockito.Mockito.when;
   private void startActivityAndWaitForSuperHeroLoaded(SuperHero superHero) {
     Activity activity = startActivity(superHero);
     WaitForTextViewWithTextIdlingResource waitForTextViewWithText =
-        new WaitForTextViewWithTextIdlingResource(activity, R.id.tv_super_hero_name, superHero.getName());
+        new WaitForTextViewWithTextIdlingResource(activity, R.id.tv_super_hero_description,
+            superHero.getDescription());
     registerIdlingResources(waitForTextViewWithText);
+  }
+
+  private void scrollToView(int viewId) {
+    onView(withId(viewId)).perform(scrollTo());
   }
 }
