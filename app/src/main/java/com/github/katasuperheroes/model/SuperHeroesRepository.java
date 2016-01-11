@@ -29,10 +29,14 @@ public class SuperHeroesRepository {
   }
 
   public List<SuperHero> getAll() {
+    waitABit();
+
     return superHeroes;
   }
 
   public SuperHero getByName(String name) {
+    waitABit();
+
     SuperHero result = null;
     for (SuperHero superHero : superHeroes) {
       if (superHero.getName().equals(name)) {
@@ -41,6 +45,14 @@ public class SuperHeroesRepository {
       }
     }
     return result;
+  }
+
+  private void waitABit() {
+    try {
+      Thread.sleep(1500);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   private void fillRepositoryWithFakeData() {

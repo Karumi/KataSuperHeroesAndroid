@@ -27,13 +27,13 @@ This Application is based on two main Activities:
 
 **Your task as Android Developer for this kata is to write all the UI tests needed to check if the Application UI is working as should.**
 
-Before to start execute the application and explore it manually to design your test scenarios.
+Before to start execute the application and explore it manually and review the application code to design your test scenarios.
 
 ---
 
 #License
 
-Copyright 2015 Karumi
+Copyright 2016 Karumi
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -51,3 +51,6 @@ limitations under the License.
 [espresso]: https://google.github.io/android-testing-support-library/docs/
 [dagger2]: http://google.github.io/dagger/
 [testDoubles]: http://www.martinfowler.com/bliki/TestDouble.html
+[applicationScreencast]: ../art/ApplicationScreencast.gif
+[mainActivityScreenshot]: ../MainActivityScreenshot.png
+[superHeroDetailActivityScreenshot]: ../SuperHeroDetailActivityScreenshot.png
