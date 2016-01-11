@@ -37,6 +37,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -45,12 +47,13 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class) @LargeTest public class MainActivityTest {
 
-  private static final int ANY_NUMBER_OF_SUPER_HEROES = 3;
+  private static final int ANY_NUMBER_OF_SUPER_HEROES = 10;
 
   @Rule public DaggerMockRule<MainComponent> daggerRule =
       new DaggerMockRule<>(MainComponent.class, new MainModule()).set(
@@ -78,17 +81,21 @@ import static org.mockito.Mockito.when;
   }
 
   @Test public void showsSuperHeroesNameIfThereAreSuperHeroes() {
-    List<SuperHero> superHeroes = givenThereAreSuperHeroes(ANY_NUMBER_OF_SUPER_HEROES);
+    List<SuperHero> superHeroes = givenThereAreSomeSuperHeroes(ANY_NUMBER_OF_SUPER_HEROES);
 
     startActivity();
 
-    for (SuperHero superHero : superHeroes) {
-      onView(withText(superHero.getName())).check(matches(isDisplayed()));
-    }
+    RecyclerViewInteraction.<SuperHero>onRecyclerView(withId(R.id.recycler_view))
+        .withItems(superHeroes)
+        .check(new RecyclerViewInteraction.ItemViewAssertion<SuperHero>() {
+          @Override public void check(SuperHero superHero, View view, NoMatchingViewException e) {
+            matches(hasDescendant(withText(superHero.getName()))).check(view, e);
+          }
+        });
   }
 
-  @Test public void showsAvengersBadgeIfSuperHeroIsPartOfTheAvengersTeam() {
-    List<SuperHero> superHeroes = givenThereAreSuperHeroes(ANY_NUMBER_OF_SUPER_HEROES, true);
+  @Test public void showsAvengersBadgeIfASuperHeroIsPartOfTheAvengersTeam() {
+    List<SuperHero> superHeroes = givenThereAreSomeAvengers(ANY_NUMBER_OF_SUPER_HEROES);
 
     startActivity();
 
@@ -102,15 +109,54 @@ import static org.mockito.Mockito.when;
         });
   }
 
+  @Test public void doesNotShowAvengersBadgeIfASuperHeroIsNotPartOfTheAvengersTeam() {
+    List<SuperHero> superHeroes = givenThereAreSomeSuperHeroes(ANY_NUMBER_OF_SUPER_HEROES, false);
+
+    startActivity();
+
+    RecyclerViewInteraction.<SuperHero>onRecyclerView(withId(R.id.recycler_view))
+        .withItems(superHeroes)
+        .check(new RecyclerViewInteraction.ItemViewAssertion<SuperHero>() {
+          @Override public void check(SuperHero superHero, View view, NoMatchingViewException e) {
+            matches(hasDescendant(allOf(withId(R.id.iv_avengers_badge),
+                withEffectiveVisibility(ViewMatchers.Visibility.GONE)))).check(view, e);
+          }
+        });
+  }
+
+  @Test public void doesNotShowEmptyCaseIfThereAreSuperHeroes() {
+    givenThereAreSomeSuperHeroes(ANY_NUMBER_OF_SUPER_HEROES);
+
+    startActivity();
+
+    onView(withId(R.id.tv_empty_case)).check(matches(not(isDisplayed())));
+  }
+
+  @Test public void doesNotShowLoadingViewOnceSuperHeroesAreShown() {
+    givenThereAreSomeSuperHeroes(ANY_NUMBER_OF_SUPER_HEROES);
+
+    startActivity();
+
+    onView(withId(R.id.progress_bar)).check(matches(not(isDisplayed())));
+  }
+
+  @Test public void showsProgressBarWhileLoadingSuperHeroes() {
+    givenSuperHeroesLoadIsSlow();
+
+    startActivity();
+
+    onView(withId(R.id.progress_bar)).check(matches(isDisplayed()));
+  }
+
   private List<SuperHero> givenThereAreSomeAvengers(int numberOfAvengers) {
-    return givenThereAreSuperHeroes(numberOfAvengers, true);
+    return givenThereAreSomeSuperHeroes(numberOfAvengers, true);
   }
 
-  private List<SuperHero> givenThereAreSuperHeroes(int numberOfSuperHeroes) {
-    return givenThereAreSuperHeroes(numberOfSuperHeroes, false);
+  private List<SuperHero> givenThereAreSomeSuperHeroes(int numberOfSuperHeroes) {
+    return givenThereAreSomeSuperHeroes(numberOfSuperHeroes, false);
   }
 
-  private List<SuperHero> givenThereAreSuperHeroes(int numberOfSuperHeroes, boolean avengers) {
+  private List<SuperHero> givenThereAreSomeSuperHeroes(int numberOfSuperHeroes, boolean avengers) {
     List<SuperHero> superHeroes = new LinkedList<>();
     for (int i = 0; i < numberOfSuperHeroes; i++) {
       String superHeroName = "SuperHero - " + i;
@@ -125,6 +171,15 @@ import static org.mockito.Mockito.when;
 
   private void givenThereAreNoSuperHeroes() {
     when(repository.getAll()).thenReturn(Collections.<SuperHero>emptyList());
+  }
+
+  private void givenSuperHeroesLoadIsSlow() {
+    when(repository.getAll()).thenAnswer(new Answer<Object>() {
+      @Override public Object answer(InvocationOnMock invocation) throws Throwable {
+        Thread.sleep(1000);
+        return Collections.<SuperHero>emptyList();
+      }
+    });
   }
 
   private void startActivity() {
