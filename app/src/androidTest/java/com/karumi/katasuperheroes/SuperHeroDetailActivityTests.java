@@ -16,6 +16,7 @@
 
 package com.karumi.katasuperheroes;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
@@ -24,6 +25,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
+import com.karumi.katasuperheroes.idlingresource.WaitForViewVisibleIdlingResource;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.ui.view.SuperHeroDetailActivity;
@@ -34,6 +36,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.registerIdlingResources;
+import static android.support.test.espresso.Espresso.unregisterIdlingResources;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -81,18 +85,26 @@ import static org.mockito.Mockito.when;
   @Test public void showsSuperHeroName() {
     SuperHero superHero = givenThereIsASuperHero();
 
-    startActivity(superHero);
+    Activity activity = startActivity(superHero);
+    WaitForViewVisibleIdlingResource waitForViewVisible =
+        new WaitForViewVisibleIdlingResource(activity, R.id.tv_super_hero_name);
+    registerIdlingResources(waitForViewVisible);
 
     onView(allOf(withId(R.id.tv_super_hero_name), withText(superHero.getName()))).check(
         matches(isDisplayed()));
+    unregisterIdlingResources(waitForViewVisible);
   }
 
   @Test public void showsSuperHeroDescription() {
     SuperHero superHero = givenThereIsASuperHero();
 
-    startActivity(superHero);
+    Activity activity = startActivity(superHero);
+    WaitForViewVisibleIdlingResource waitForViewVisible =
+        new WaitForViewVisibleIdlingResource(activity, R.id.tv_super_hero_description);
+    registerIdlingResources(waitForViewVisible);
 
     onView(withText(superHero.getDescription())).check(matches(isDisplayed()));
+    unregisterIdlingResources(waitForViewVisible);
   }
 
   @Test public void doesNotShowAvengersBadgeIfSuperHeroIsNotPartOfTheAvengersTeam() {
