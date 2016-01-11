@@ -1,5 +1,14 @@
 language: android
 
+cache:
+  directories:
+    - ${TRAVIS_BUILD_DIR}/gradle/caches/
+    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
+
+env:
+  global:
+    - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
+
 android:
   components:
     - tools
