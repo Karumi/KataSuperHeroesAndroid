@@ -55,6 +55,11 @@ dependencies {
     exclude group: 'javax.inject', module: 'javax.inject'
     exclude group: 'com.squareup', module: 'javawriter'
   }
+  androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+    exclude module: 'support-annotations'
+    exclude module: 'recyclerview-v7'
+    exclude module: 'support-v4'
+  }
 }
 
 configurations.all {

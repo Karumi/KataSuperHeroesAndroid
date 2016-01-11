@@ -35,6 +35,7 @@ If you've covered all the application functionality using UI tests try to contin
 
 * Add a pull to refresh mechanism to ``MainActivity`` and test it.
 * Modify ``SuperHeroDetailActivity`` to handle an error case where the name of the super hero used to start this activity does not exist and show a message if this happens.
+* Modify the project to handle connection errors and show a ``SnackBar`` to indicate something went wrong.
 
 ---
 
