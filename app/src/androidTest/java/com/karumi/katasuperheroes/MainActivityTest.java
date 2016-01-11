@@ -16,10 +16,7 @@
 
 package com.karumi.katasuperheroes;
 
-import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
@@ -29,7 +26,6 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
-import com.karumi.katasuperheroes.idlingresource.ViewVisibleIdlingResource;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.recyclerview.RecyclerViewInteraction;
@@ -43,8 +39,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -57,6 +51,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.karumi.katasuperheroes.matchers.RecyclerViewItemsCountMatcher.recyclerViewHasItemCount;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
 import static org.mockito.Mockito.when;
@@ -150,17 +145,6 @@ import static org.mockito.Mockito.when;
     onView(withId(R.id.progress_bar)).check(matches(not(isDisplayed())));
   }
 
-  @Test public void showsProgressBarWhileLoadingSuperHeroes() {
-    givenSuperHeroesLoadIsSlow();
-
-    Activity activity = startActivity();
-    IdlingResource loadingIdleResource = new ViewVisibleIdlingResource(activity, R.id.progress_bar);
-    Espresso.registerIdlingResources(loadingIdleResource);
-
-    onView(withId(R.id.progress_bar)).check(matches(isDisplayed()));
-    Espresso.unregisterIdlingResources(loadingIdleResource);
-  }
-
   @Test public void opensSuperHeroDetailActivityOnRecyclerViewItemTapped() {
     List<SuperHero> superHeroes = givenThereAreSomeSuperHeroes();
     int superHeroIndex = 0;
@@ -172,6 +156,15 @@ import static org.mockito.Mockito.when;
     SuperHero superHeroSelected = superHeroes.get(superHeroIndex);
     intended(hasComponent(SuperHeroDetailActivity.class.getCanonicalName()));
     intended(hasExtra("super_hero_name_key", superHeroSelected.getName()));
+  }
+
+  @Test public void showsTheExactNumberOfSuperHeroes() {
+    givenThereAreSomeSuperHeroes(ANY_NUMBER_OF_SUPER_HEROES);
+
+    startActivity();
+
+    onView(withId(R.id.recycler_view)).check(
+        matches(recyclerViewHasItemCount(ANY_NUMBER_OF_SUPER_HEROES)));
   }
 
   private List<SuperHero> givenThereAreSomeAvengers(int numberOfAvengers) {
@@ -204,15 +197,6 @@ import static org.mockito.Mockito.when;
 
   private void givenThereAreNoSuperHeroes() {
     when(repository.getAll()).thenReturn(Collections.<SuperHero>emptyList());
-  }
-
-  private void givenSuperHeroesLoadIsSlow() {
-    when(repository.getAll()).thenAnswer(new Answer<Object>() {
-      @Override public Object answer(InvocationOnMock invocation) throws Throwable {
-        Thread.sleep(2000);
-        return Collections.<SuperHero>emptyList();
-      }
-    });
   }
 
   private MainActivity startActivity() {
