@@ -20,21 +20,23 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import com.github.katasuperheroes.SuperHeroesApplication;
 import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.model.SuperHeroesRepository;
 import com.github.katasuperheroes.ui.presenter.SuperHeroesPresenter;
-import com.github.katasuperheroes.usecase.GetSuperHeroes;
 import github.com.katasuperheroes.R;
 import java.util.List;
+import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity implements SuperHeroesPresenter.View {
 
+  @Inject SuperHeroesPresenter presenter;
+
   private SuperHeroesAdapter adapter;
-  private SuperHeroesPresenter presenter;
   private View emptyCaseView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    initializeDagger();
     initializePresenter();
     initializeEmptyCaseView();
     initializeAdapter();
@@ -67,10 +69,12 @@ public class MainActivity extends BaseActivity implements SuperHeroesPresenter.V
     emptyCaseView = findViewById(R.id.tv_empty_case);
   }
 
+  private void initializeDagger() {
+    SuperHeroesApplication app = (SuperHeroesApplication) getApplication();
+    app.getMainComponent().inject(this);
+  }
+
   private void initializePresenter() {
-    SuperHeroesRepository repository = new SuperHeroesRepository();
-    GetSuperHeroes getSuperHeroes = new GetSuperHeroes(repository);
-    presenter = new SuperHeroesPresenter(getSuperHeroes);
     presenter.setView(this);
   }
 

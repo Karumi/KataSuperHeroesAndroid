@@ -19,12 +19,13 @@ package com.github.katasuperheroes.ui.presenter;
 import com.github.katasuperheroes.model.SuperHero;
 import com.github.katasuperheroes.usecase.GetSuperHeroes;
 import java.util.List;
+import javax.inject.Inject;
 
 public class SuperHeroesPresenter extends Presenter<SuperHeroesPresenter.View> {
 
   private final GetSuperHeroes getSuperHeroes;
 
-  public SuperHeroesPresenter(GetSuperHeroes getSuperHeroes) {
+  @Inject public SuperHeroesPresenter(GetSuperHeroes getSuperHeroes) {
     this.getSuperHeroes = getSuperHeroes;
   }
 

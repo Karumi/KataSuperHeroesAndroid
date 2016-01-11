@@ -32,7 +32,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class) @LargeTest public class ApplicationTest {
 
-  @Rule public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+  @Rule public ActivityTestRule<MainActivity> activityRule =
+      new ActivityTestRule<>(MainActivity.class);
 
   @Test public void test1() {
     activityRule.getActivity();

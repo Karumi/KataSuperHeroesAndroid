@@ -18,6 +18,7 @@ package com.github.katasuperheroes.ui.presenter;
 
 import com.github.katasuperheroes.model.SuperHero;
 import com.github.katasuperheroes.usecase.GetSuperHeroByName;
+import javax.inject.Inject;
 
 public class SuperHeroDetailPresenter extends Presenter<SuperHeroDetailPresenter.View> {
 
@@ -25,7 +26,7 @@ public class SuperHeroDetailPresenter extends Presenter<SuperHeroDetailPresenter
 
   private String name;
 
-  public SuperHeroDetailPresenter(GetSuperHeroByName getSuperHeroByName) {
+  @Inject public SuperHeroDetailPresenter(GetSuperHeroByName getSuperHeroByName) {
     this.getSuperHeroByName = getSuperHeroByName;
   }
 

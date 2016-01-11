@@ -20,12 +20,13 @@ import android.os.Handler;
 import android.os.Looper;
 import com.github.katasuperheroes.model.SuperHero;
 import com.github.katasuperheroes.model.SuperHeroesRepository;
+import javax.inject.Inject;
 
 public class GetSuperHeroByName {
 
   private final SuperHeroesRepository repository;
 
-  public GetSuperHeroByName(SuperHeroesRepository repository) {
+  @Inject public GetSuperHeroByName(SuperHeroesRepository repository) {
     this.repository = repository;
   }
 

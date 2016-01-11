@@ -21,16 +21,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.github.katasuperheroes.SuperHeroesApplication;
 import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.model.SuperHeroesRepository;
 import com.github.katasuperheroes.ui.presenter.SuperHeroDetailPresenter;
-import com.github.katasuperheroes.usecase.GetSuperHeroByName;
 import com.squareup.picasso.Picasso;
 import github.com.katasuperheroes.R;
+import javax.inject.Inject;
 
 public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDetailPresenter.View {
 
   private static final String SUPER_HERO_NAME_KEY = "super_hero_name_key";
+
+  @Inject SuperHeroDetailPresenter presenter;
 
   private ImageView superHeroPhotoImageView;
   private TextView superHeroNameTextView;
@@ -38,6 +40,7 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    initializeDagger();
     initializeSuperHeroView();
     initializePresenter();
   }
@@ -64,6 +67,11 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
     setTitle(superHeroName);
   }
 
+  private void initializeDagger() {
+    SuperHeroesApplication app = (SuperHeroesApplication) getApplication();
+    app.getMainComponent().inject(this);
+  }
+
   private void initializeSuperHeroView() {
     superHeroPhotoImageView = (ImageView) findViewById(R.id.iv_super_hero_photo);
     superHeroNameTextView = (TextView) findViewById(R.id.tv_super_hero_name);
@@ -71,13 +79,10 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
   }
 
   private void initializePresenter() {
-    GetSuperHeroByName getSuperHeroByName = new GetSuperHeroByName(new SuperHeroesRepository());
-    SuperHeroDetailPresenter superHeroDetailPresenter =
-        new SuperHeroDetailPresenter(getSuperHeroByName);
-    superHeroDetailPresenter.setView(this);
+    presenter.setView(this);
     String name = getSuperHeroName();
-    superHeroDetailPresenter.setName(name);
-    superHeroDetailPresenter.initialize();
+    presenter.setName(name);
+    presenter.initialize();
   }
 
   private String getSuperHeroName() {
