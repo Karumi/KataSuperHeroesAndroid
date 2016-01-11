@@ -50,7 +50,8 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
   }
 
   @Override public void showSuperHero(SuperHero superHero) {
-    Picasso.with(this).load(superHero.getPhoto()).fit().centerCrop().into(superHeroPhotoImageView);
+    String superHeroPhoto = superHero.getPhoto() != null ? superHero.getPhoto() : "";
+    Picasso.with(this).load(superHeroPhoto).fit().centerCrop().into(superHeroPhotoImageView);
     superHeroNameTextView.setText(superHero.getName());
     superHeroDescriptionTextView.setText(superHero.getDescription());
   }

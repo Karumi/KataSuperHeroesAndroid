@@ -39,6 +39,13 @@ If you've covered all the application functionality using UI tests try to contin
 
 ---
 
+## Documentation
+
+There are some links which can be useful to finish these tasks:
+
+* [Android Testing Support Library official documentation][androidTestingDocumentation]
+* [Espresso Cheat Sheet][espressoCheatSheet]
+
 #License
 
 Copyright 2016 Karumi
@@ -62,3 +69,5 @@ limitations under the License.
 [applicationScreencast]: ./art/ApplicationScreencast.gif
 [mainActivityScreenshot]: ./art/MainActivityScreenshot.png
 [superHeroDetailActivityScreenshot]: ./art/SuperHeroDetailActivityScreenshot.png
+[androidTestingDocumentation]: https://google.github.io/android-testing-support-library
+[espressoCheatSheet]: https://google.github.io/android-testing-support-library/docs/espresso/cheatsheet/index.html

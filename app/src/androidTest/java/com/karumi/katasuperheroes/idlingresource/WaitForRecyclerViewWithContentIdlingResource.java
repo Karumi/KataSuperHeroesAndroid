@@ -18,27 +18,29 @@ package com.karumi.katasuperheroes.idlingresource;
 
 import android.app.Activity;
 import android.support.test.espresso.IdlingResource;
-import android.view.View;
+import android.support.v7.widget.RecyclerView;
 
-/**
- * Indicates to Espresso that the test is idle while the view is visible
- */
-public class ViewVisibleIdlingResource implements IdlingResource {
+public class WaitForRecyclerViewWithContentIdlingResource implements IdlingResource {
 
   private final Activity activity;
-  private final int viewId;
+  private final int recyclerViewId;
+  private final int numberOfItems;
 
-  public ViewVisibleIdlingResource(Activity activity, int viewId) {
+  public WaitForRecyclerViewWithContentIdlingResource(Activity activity, int recyclerViewId,
+      int numberOfItems) {
     this.activity = activity;
-    this.viewId = viewId;
+    this.recyclerViewId = recyclerViewId;
+    this.numberOfItems = numberOfItems;
   }
 
   @Override public String getName() {
-    return "ViewVisibleIdlingResource";
+    return "WaitForRecyclerViewWithContentIdlingResource";
   }
 
   @Override public boolean isIdleNow() {
-    return activity.findViewById(viewId).getVisibility() == View.VISIBLE;
+    RecyclerView recyclerView = (RecyclerView) activity.findViewById(recyclerViewId);
+    int numberOfItemsInRecyclerView = recyclerView.getAdapter().getItemCount();
+    return numberOfItemsInRecyclerView == numberOfItems;
   }
 
   @Override public void registerIdleTransitionCallback(ResourceCallback callback) {

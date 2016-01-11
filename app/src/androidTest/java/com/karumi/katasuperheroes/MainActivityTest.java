@@ -21,18 +21,21 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.NoMatchingViewException;
+import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
 import com.karumi.katasuperheroes.idlingresource.ViewVisibleIdlingResource;
+import com.karumi.katasuperheroes.idlingresource.WaitForRecyclerViewWithContentIdlingResource;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.recyclerview.RecyclerViewInteraction;
 import com.karumi.katasuperheroes.ui.view.MainActivity;
+import com.karumi.katasuperheroes.ui.view.SuperHeroDetailActivity;
 import it.cosenonjaviste.daggermock.DaggerMockRule;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -45,7 +48,11 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
@@ -71,8 +78,8 @@ import static org.mockito.Mockito.when;
             }
           });
 
-  @Rule public ActivityTestRule<MainActivity> activityRule =
-      new ActivityTestRule<>(MainActivity.class, false, false);
+  @Rule public IntentsTestRule<MainActivity> activityRule =
+      new IntentsTestRule<>(MainActivity.class, true, false);
 
   @Mock SuperHeroesRepository repository;
 
@@ -155,8 +162,30 @@ import static org.mockito.Mockito.when;
     Espresso.unregisterIdlingResources(loadingIdleResource);
   }
 
+  @Test public void opensSuperHeroDetailActivityOnRecyclerViewItemTapped() {
+    List<SuperHero> superHeroes = givenThereAreSomeSuperHeroes();
+    int superHeroIndex = 0;
+    Activity activity = startActivity();
+    WaitForRecyclerViewWithContentIdlingResource recyclerViewIdlingResource =
+        new WaitForRecyclerViewWithContentIdlingResource(activity, R.id.recycler_view,
+            superHeroes.size());
+
+    Espresso.registerIdlingResources(recyclerViewIdlingResource);
+    onView(withId(R.id.recycler_view)).
+        perform(RecyclerViewActions.actionOnItemAtPosition(superHeroIndex, click()));
+
+    SuperHero superHeroSelected = superHeroes.get(superHeroIndex);
+    intended(hasComponent(SuperHeroDetailActivity.class.getCanonicalName()));
+    intended(hasExtra("super_hero_name_key", superHeroSelected.getName()));
+    Espresso.unregisterIdlingResources(recyclerViewIdlingResource);
+  }
+
   private List<SuperHero> givenThereAreSomeAvengers(int numberOfAvengers) {
     return givenThereAreSomeSuperHeroes(numberOfAvengers, true);
+  }
+
+  private List<SuperHero> givenThereAreSomeSuperHeroes() {
+    return givenThereAreSomeSuperHeroes(ANY_NUMBER_OF_SUPER_HEROES);
   }
 
   private List<SuperHero> givenThereAreSomeSuperHeroes(int numberOfSuperHeroes) {
@@ -170,7 +199,10 @@ import static org.mockito.Mockito.when;
       String superHeroPhoto = "https://i.annihil.us/u/prod/marvel/i/mg/c/60/55b6a28ef24fa.jpg";
 
       String superHeroDescription = "Description Super Hero - " + i;
-      superHeroes.add(new SuperHero(superHeroName, superHeroPhoto, avengers, superHeroDescription));
+      SuperHero superHero =
+          new SuperHero(superHeroName, superHeroPhoto, avengers, superHeroDescription);
+      superHeroes.add(superHero);
+      when(repository.getByName(superHeroName)).thenReturn(superHero);
     }
     when(repository.getAll()).thenReturn(superHeroes);
     return superHeroes;
