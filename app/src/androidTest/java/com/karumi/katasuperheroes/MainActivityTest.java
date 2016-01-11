@@ -30,7 +30,6 @@ import android.view.View;
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
 import com.karumi.katasuperheroes.idlingresource.ViewVisibleIdlingResource;
-import com.karumi.katasuperheroes.idlingresource.RecyclerViewWithContentIdlingResource;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.recyclerview.RecyclerViewInteraction;
@@ -165,19 +164,14 @@ import static org.mockito.Mockito.when;
   @Test public void opensSuperHeroDetailActivityOnRecyclerViewItemTapped() {
     List<SuperHero> superHeroes = givenThereAreSomeSuperHeroes();
     int superHeroIndex = 0;
-    Activity activity = startActivity();
-    RecyclerViewWithContentIdlingResource recyclerViewIdlingResource =
-        new RecyclerViewWithContentIdlingResource(activity, R.id.recycler_view,
-            superHeroes.size());
+    startActivity();
 
-    Espresso.registerIdlingResources(recyclerViewIdlingResource);
     onView(withId(R.id.recycler_view)).
         perform(RecyclerViewActions.actionOnItemAtPosition(superHeroIndex, click()));
 
     SuperHero superHeroSelected = superHeroes.get(superHeroIndex);
     intended(hasComponent(SuperHeroDetailActivity.class.getCanonicalName()));
     intended(hasExtra("super_hero_name_key", superHeroSelected.getName()));
-    Espresso.unregisterIdlingResources(recyclerViewIdlingResource);
   }
 
   private List<SuperHero> givenThereAreSomeAvengers(int numberOfAvengers) {
