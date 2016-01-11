@@ -38,6 +38,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.karumi.katasuperheroes.matchers.ToolbarMatcher.onToolbarWithTitle;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.mockito.Mockito.when;
@@ -60,6 +61,14 @@ import static org.mockito.Mockito.when;
       new IntentsTestRule<>(SuperHeroDetailActivity.class, true, false);
 
   @Mock SuperHeroesRepository repository;
+
+  @Test public void showsSuperHeroNameAsToolbarTitle() {
+    SuperHero superHero = givenThereIsASuperHero();
+
+    startActivity(superHero);
+
+    onToolbarWithTitle(superHero.getName()).check(matches(isDisplayed()));
+  }
 
   @Test public void hidesProgressBarOnSuperHeroLoaded() {
     SuperHero superHero = givenThereIsASuperHero();
