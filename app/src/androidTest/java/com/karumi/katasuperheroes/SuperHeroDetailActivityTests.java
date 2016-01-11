@@ -37,7 +37,9 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.core.AllOf.allOf;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class) @LargeTest public class SuperHeroDetailActivityTests {
@@ -59,7 +61,7 @@ import static org.mockito.Mockito.when;
 
   @Mock SuperHeroesRepository repository;
 
-  @Test public void hidesProgressBaronSuperHeroLoaded() {
+  @Test public void hidesProgressBarOnSuperHeroLoaded() {
     SuperHero superHero = givenThereIsASuperHero();
 
     startActivity(superHero);
@@ -67,8 +69,45 @@ import static org.mockito.Mockito.when;
     onView(withId(R.id.progress_bar)).check(matches(not(isDisplayed())));
   }
 
+  @Test public void showsSuperHeroName() {
+    SuperHero superHero = givenThereIsASuperHero();
+
+    startActivity(superHero);
+
+    onView(allOf(withId(R.id.tv_super_hero_name), withText(superHero.getName()))).check(
+        matches(isDisplayed()));
+  }
+
+  @Test public void showsSuperHeroDescription() {
+    SuperHero superHero = givenThereIsASuperHero();
+
+    startActivity(superHero);
+
+    onView(withText(superHero.getDescription())).check(matches(isDisplayed()));
+  }
+
+  @Test public void doesNotShowAvengersBadgeIfSuperHeroIsNotPartOfTheAvengersTeam() {
+    SuperHero superHero = givenThereIsASuperHero();
+
+    startActivity(superHero);
+
+    onView(withId(R.id.iv_avengers_badge)).check(matches(not(isDisplayed())));
+  }
+
+  @Test public void showsAvengersBadgeIfSuperHeroIsNotPartOfTheAvengersTeam() {
+    SuperHero superHero = givenAnAvenger();
+
+    startActivity(superHero);
+
+    onView(withId(R.id.iv_avengers_badge)).check(matches(isDisplayed()));
+  }
+
   private SuperHero givenThereIsASuperHero() {
     return givenThereIsASuperHero(false);
+  }
+
+  private SuperHero givenAnAvenger() {
+    return givenThereIsASuperHero(true);
   }
 
   private SuperHero givenThereIsASuperHero(boolean isAvenger) {

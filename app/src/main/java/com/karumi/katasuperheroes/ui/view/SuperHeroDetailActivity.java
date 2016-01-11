@@ -19,6 +19,7 @@ package com.karumi.katasuperheroes.ui.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.karumi.katasuperheroes.R;
@@ -37,6 +38,7 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
   private ImageView superHeroPhotoImageView;
   private TextView superHeroNameTextView;
   private TextView superHeroDescriptionTextView;
+  private View avengersBadgeView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -53,6 +55,8 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
     Picasso.with(this).load(superHero.getPhoto()).fit().centerCrop().into(superHeroPhotoImageView);
     superHeroNameTextView.setText(superHero.getName());
     superHeroDescriptionTextView.setText(superHero.getDescription());
+    int avengersBadgeVisibility = superHero.isAvenger() ? View.VISIBLE : View.GONE;
+    avengersBadgeView.setVisibility(avengersBadgeVisibility);
   }
 
   public static void open(Context context, String superHeroName) {
@@ -76,6 +80,7 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
     superHeroPhotoImageView = (ImageView) findViewById(R.id.iv_super_hero_photo);
     superHeroNameTextView = (TextView) findViewById(R.id.tv_super_hero_name);
     superHeroDescriptionTextView = (TextView) findViewById(R.id.tv_super_hero_description);
+    avengersBadgeView = findViewById(R.id.iv_avengers_badge);
   }
 
   private void initializePresenter() {
