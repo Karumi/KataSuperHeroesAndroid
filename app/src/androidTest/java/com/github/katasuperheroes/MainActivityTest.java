@@ -16,24 +16,44 @@
 
 package com.github.katasuperheroes;
 
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
+import com.github.katasuperheroes.di.MainComponent;
+import com.github.katasuperheroes.di.MainModule;
+import com.github.katasuperheroes.model.SuperHeroesRepository;
 import com.github.katasuperheroes.ui.view.MainActivity;
 import github.com.katasuperheroes.R;
+import it.cosenonjaviste.daggermock.DaggerMockRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-@RunWith(AndroidJUnit4.class) @LargeTest public class ApplicationTest {
+@RunWith(AndroidJUnit4.class) @LargeTest public class MainActivityTest {
+
+  @Rule public DaggerMockRule<MainComponent> daggerRule =
+      new DaggerMockRule<>(MainComponent.class, new MainModule()).set(
+          new DaggerMockRule.ComponentSetter<MainComponent>() {
+            @Override public void setComponent(MainComponent component) {
+              SuperHeroesApplication app =
+                  (SuperHeroesApplication) InstrumentationRegistry.getInstrumentation()
+                      .getTargetContext()
+                      .getApplicationContext();
+              app.setComponent(component);
+            }
+          });
 
   @Rule public ActivityTestRule<MainActivity> activityRule =
       new ActivityTestRule<>(MainActivity.class);
+
+  @Mock SuperHeroesRepository repository;
 
   @Test public void test1() {
     activityRule.getActivity();
