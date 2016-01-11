@@ -26,7 +26,7 @@ import android.test.suitebuilder.annotation.LargeTest;
 
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
-import com.karumi.katasuperheroes.idlingresource.WaitForTextViewWithText;
+import com.karumi.katasuperheroes.idlingresource.WaitForTextViewWithTextIdlingResource;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.ui.view.SuperHeroDetailActivity;
@@ -83,7 +83,7 @@ import static org.mockito.Mockito.when;
   @Test public void showsSuperHeroNameAsToolbarTitle() {
     SuperHero superHero = givenThereIsASuperHero();
 
-    startActivity(superHero);
+    startActivityAndWaitForSuperHeroLoaded(superHero);
 
     onToolbarWithTitle(superHero.getName()).check(matches(isDisplayed()));
   }
@@ -91,7 +91,7 @@ import static org.mockito.Mockito.when;
   @Test public void hidesProgressBarOnSuperHeroLoaded() {
     SuperHero superHero = givenThereIsASuperHero();
 
-    startActivity(superHero);
+    startActivityAndWaitForSuperHeroLoaded(superHero);
 
     onView(withId(R.id.progress_bar)).check(matches(not(isDisplayed())));
   }
@@ -99,10 +99,7 @@ import static org.mockito.Mockito.when;
   @Test public void showsSuperHeroName() {
     SuperHero superHero = givenThereIsASuperHero();
 
-    Activity activity = startActivity(superHero);
-    WaitForTextViewWithText waitForTextViewWithText =
-        new WaitForTextViewWithText(activity, R.id.tv_super_hero_name, superHero.getName());
-    registerIdlingResources(waitForTextViewWithText);
+    startActivityAndWaitForSuperHeroLoaded(superHero);
 
     onView(allOf(withId(R.id.tv_super_hero_name), withText(superHero.getName()))).check(
         matches(isDisplayed()));
@@ -111,11 +108,7 @@ import static org.mockito.Mockito.when;
   @Test public void showsSuperHeroDescription() {
     SuperHero superHero = givenThereIsASuperHero();
 
-    Activity activity = startActivity(superHero);
-    WaitForTextViewWithText waitForTextViewWithText =
-        new WaitForTextViewWithText(activity, R.id.tv_super_hero_description,
-            superHero.getDescription());
-    registerIdlingResources(waitForTextViewWithText);
+    startActivityAndWaitForSuperHeroLoaded(superHero);
 
     onView(withText(superHero.getDescription())).check(matches(isDisplayed()));
   }
@@ -123,7 +116,7 @@ import static org.mockito.Mockito.when;
   @Test public void doesNotShowAvengersBadgeIfSuperHeroIsNotPartOfTheAvengersTeam() {
     SuperHero superHero = givenThereIsASuperHero();
 
-    startActivity(superHero);
+    startActivityAndWaitForSuperHeroLoaded(superHero);
 
     onView(withId(R.id.iv_avengers_badge)).check(matches(not(isDisplayed())));
   }
@@ -131,7 +124,7 @@ import static org.mockito.Mockito.when;
   @Test public void showsAvengersBadgeIfSuperHeroIsNotPartOfTheAvengersTeam() {
     SuperHero superHero = givenAnAvenger();
 
-    startActivity(superHero);
+    startActivityAndWaitForSuperHeroLoaded(superHero);
 
     onView(withId(R.id.iv_avengers_badge)).check(matches(isDisplayed()));
   }
@@ -158,5 +151,12 @@ import static org.mockito.Mockito.when;
     Intent intent = new Intent();
     intent.putExtra("super_hero_name_key", superHero.getName());
     return activityRule.launchActivity(intent);
+  }
+
+  private void startActivityAndWaitForSuperHeroLoaded(SuperHero superHero) {
+    Activity activity = startActivity(superHero);
+    WaitForTextViewWithTextIdlingResource waitForTextViewWithText =
+        new WaitForTextViewWithTextIdlingResource(activity, R.id.tv_super_hero_name, superHero.getName());
+    registerIdlingResources(waitForTextViewWithText);
   }
 }

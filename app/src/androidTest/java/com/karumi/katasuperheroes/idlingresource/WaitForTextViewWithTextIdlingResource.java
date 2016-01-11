@@ -20,20 +20,20 @@ import android.app.Activity;
 import android.support.test.espresso.IdlingResource;
 import android.widget.TextView;
 
-public class WaitForTextViewWithText implements IdlingResource {
+public class WaitForTextViewWithTextIdlingResource implements IdlingResource {
 
   private final Activity activity;
   private final int textViewId;
   private final String expectedText;
 
-  public WaitForTextViewWithText(Activity activity, int viewId, String expectedText) {
+  public WaitForTextViewWithTextIdlingResource(Activity activity, int viewId, String expectedText) {
     this.activity = activity;
     this.textViewId = viewId;
     this.expectedText = expectedText;
   }
 
   @Override public String getName() {
-    return "WaitForTextViewWithText";
+    return "WaitForTextViewWithTextIdlingResource";
   }
 
   @Override public boolean isIdleNow() {
