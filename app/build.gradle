@@ -62,7 +62,7 @@ configurations.all {
 }
 
 task grantAnimationPermission(type: Exec, dependsOn: 'installDebug') {
-  commandLine "adb shell pm grant com.github.katasuperheroes android.permission.SET_ANIMATION_SCALE".
+  commandLine "adb shell pm grant com.karumi.katasuperheroes android.permission.SET_ANIMATION_SCALE".
       split(' ')
 }
 
