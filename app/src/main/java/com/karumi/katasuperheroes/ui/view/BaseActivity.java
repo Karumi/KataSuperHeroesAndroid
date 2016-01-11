@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.ui.view;
+package com.karumi.katasuperheroes.ui.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import com.github.katasuperheroes.ui.presenter.Presenter;
-import github.com.katasuperheroes.R;
+import com.karumi.katasuperheroes.R;
+import com.karumi.katasuperheroes.ui.presenter.Presenter;
 
 public abstract class BaseActivity extends AppCompatActivity implements Presenter.View {
 

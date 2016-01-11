@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.ui.view;
+package com.karumi.katasuperheroes.ui.view;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.github.katasuperheroes.SuperHeroesApplication;
-import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.ui.presenter.SuperHeroDetailPresenter;
+import com.karumi.katasuperheroes.R;
+import com.karumi.katasuperheroes.SuperHeroesApplication;
+import com.karumi.katasuperheroes.model.SuperHero;
+import com.karumi.katasuperheroes.ui.presenter.SuperHeroDetailPresenter;
 import com.squareup.picasso.Picasso;
-import github.com.katasuperheroes.R;
 import javax.inject.Inject;
 
 public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDetailPresenter.View {

@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.katasuperheroes.ui.view.MainActivity"
+    tools:context="com.karumi.katasuperheroes.ui.view.MainActivity"
     >
 
   <android.support.v7.widget.Toolbar
@@ -37,7 +37,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_below="@id/toolbar"
-      tools:context="com.github.katasuperheroes.ui.view.MainActivity"
+      tools:context="com.karumi.katasuperheroes.ui.view.MainActivity"
       tools:showIn="@layout/main_activity"
       />
 

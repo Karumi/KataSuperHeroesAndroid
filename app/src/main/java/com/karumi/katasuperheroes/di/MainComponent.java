@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.di;
+package com.karumi.katasuperheroes.di;
 
-import com.github.katasuperheroes.model.SuperHeroesRepository;
-import dagger.Module;
-import dagger.Provides;
+import com.karumi.katasuperheroes.ui.view.MainActivity;
+import com.karumi.katasuperheroes.ui.view.SuperHeroDetailActivity;
+import dagger.Component;
 import javax.inject.Singleton;
 
-@Module public class MainModule {
+@Singleton @Component(modules = MainModule.class) public interface MainComponent {
 
-  @Provides @Singleton public SuperHeroesRepository provideSuperHeroesRepository() {
-    return new SuperHeroesRepository();
-  }
+  void inject(MainActivity activity);
+
+  void inject(SuperHeroDetailActivity activity);
 }

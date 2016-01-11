@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.ui.presenter;
+package com.karumi.katasuperheroes.ui.presenter;
 
-import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.usecase.GetSuperHeroByName;
+import com.karumi.katasuperheroes.model.SuperHero;
+import com.karumi.katasuperheroes.usecase.GetSuperHeroByName;
 import javax.inject.Inject;
 
 public class SuperHeroDetailPresenter extends Presenter<SuperHeroDetailPresenter.View> {

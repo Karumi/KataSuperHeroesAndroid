@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.ui.view;
+package com.karumi.katasuperheroes.ui.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import com.github.katasuperheroes.SuperHeroesApplication;
-import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.ui.presenter.SuperHeroesPresenter;
-import github.com.katasuperheroes.R;
+import com.karumi.katasuperheroes.R;
+import com.karumi.katasuperheroes.SuperHeroesApplication;
+import com.karumi.katasuperheroes.model.SuperHero;
+import com.karumi.katasuperheroes.ui.presenter.SuperHeroesPresenter;
+
 import java.util.List;
 import javax.inject.Inject;
 

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.ui.presenter;
+package com.karumi.katasuperheroes.ui.presenter;
 
-import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.usecase.GetSuperHeroes;
+import com.karumi.katasuperheroes.model.SuperHero;
+import com.karumi.katasuperheroes.usecase.GetSuperHeroes;
 import java.util.List;
 import javax.inject.Inject;
 

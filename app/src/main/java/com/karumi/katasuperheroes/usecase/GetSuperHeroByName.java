@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.usecase;
+package com.karumi.katasuperheroes.usecase;
 
 import android.os.Handler;
 import android.os.Looper;
-import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.model.SuperHeroesRepository;
+import com.karumi.katasuperheroes.model.SuperHero;
+import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import javax.inject.Inject;
 
 public class GetSuperHeroByName {

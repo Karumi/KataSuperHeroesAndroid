@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes;
+package com.karumi.katasuperheroes;
 
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
-import com.github.katasuperheroes.di.MainComponent;
-import com.github.katasuperheroes.di.MainModule;
-import com.github.katasuperheroes.model.SuperHero;
-import com.github.katasuperheroes.model.SuperHeroesRepository;
-import com.github.katasuperheroes.ui.view.MainActivity;
-import github.com.katasuperheroes.R;
+import com.karumi.katasuperheroes.di.MainComponent;
+import com.karumi.katasuperheroes.di.MainModule;
+import com.karumi.katasuperheroes.model.SuperHero;
+import com.karumi.katasuperheroes.model.SuperHeroesRepository;
+import com.karumi.katasuperheroes.ui.view.MainActivity;
 import it.cosenonjaviste.daggermock.DaggerMockRule;
 import java.util.Collections;
 import org.junit.Rule;

@@ -15,7 +15,7 @@ android {
   compileSdkVersion 23
   buildToolsVersion "23.0.2"
   defaultConfig {
-    applicationId 'github.com.katasuperheroes'
+    applicationId 'com.karumi.katasuperheroes'
     minSdkVersion 16
     targetSdkVersion 23
     versionCode 1
@@ -59,4 +59,15 @@ dependencies {
 
 configurations.all {
   resolutionStrategy.force 'com.android.support:support-annotations:23.0.1'
+}
+
+task grantAnimationPermission(type: Exec, dependsOn: 'installDebug') {
+  commandLine "adb shell pm grant com.github.katasuperheroes android.permission.SET_ANIMATION_SCALE".
+      split(' ')
+}
+
+tasks.whenTaskAdded { task ->
+  if (task.name.startsWith('connected')) {
+    task.dependsOn grantAnimationPermission
+  }
 }

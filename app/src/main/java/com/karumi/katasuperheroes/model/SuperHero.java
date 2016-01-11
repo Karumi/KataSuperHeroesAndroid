@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.model;
+package com.karumi.katasuperheroes.model;
 
 public class SuperHero {
 

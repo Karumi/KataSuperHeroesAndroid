@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes;
+package com.karumi.katasuperheroes;
 
 import android.app.Application;
 import android.support.annotation.VisibleForTesting;
-import com.github.katasuperheroes.di.DaggerMainComponent;
-import com.github.katasuperheroes.di.MainComponent;
+import com.karumi.katasuperheroes.di.DaggerMainComponent;
+import com.karumi.katasuperheroes.di.MainComponent;
 
 public class SuperHeroesApplication extends Application {
 

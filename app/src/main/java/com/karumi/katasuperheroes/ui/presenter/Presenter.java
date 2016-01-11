@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.katasuperheroes.ui.presenter;
+package com.karumi.katasuperheroes.ui.presenter;
 
 public class Presenter<T extends Presenter.View> {
 
