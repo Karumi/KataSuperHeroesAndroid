@@ -14,13 +14,13 @@ This repository contains an Android application to show Super Heroes information
 
 ![ApplicationScreencast][applicationScreencast]
 
-This Application is based on two main Activities:
+This Application is based on two Activities:
 
-* MainActivity, showing a list of super heroes with name, photo and a special badge if is part of the Avengers Team.
+* ``MainActivity``, showing a list of super heroes with name, photo and a special badge if is part of the Avengers Team.
 
 ![MainActivityScreenhot][mainActivityScreenshot]
 
-* SuperHeroDetailActivity, showing detailed information for a super hero like the name, photo and description.
+* ``SuperHeroDetailActivity``, showing detailed information for a super hero like the name, photo and description.
 
 ![SuperHeroDetailActivityScreenshot][superHeroDetailActivityScreenshot]
 
@@ -28,6 +28,13 @@ This Application is based on two main Activities:
 **Your task as Android Developer for this kata is to write all the UI tests needed to check if the Application UI is working as should. The application architecture, dependencies and configuration is ready to just start writing tests. In this project you'll find a Dagger2 configured to be able to replace production code with test doubles easily and Espresso to be able to interact with the application user interface.**
 
 Before to start, execute the application, explore it manually and review the code to design your test scenarios.
+
+## Extra Tasks
+
+If you've covered all the application functionality using UI tests try to continue with the following tasks:
+
+* Add a pull to refresh mechanism to ``MainActivity`` and test it.
+* Modify ``SuperHeroDetailActivity`` to handle an error case where the name of the super hero used to start this activity does not exist and show a message if this happens.
 
 ---
 
