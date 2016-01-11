@@ -25,9 +25,9 @@ This Application is based on two main Activities:
 ![SuperHeroDetailActivityScreenshot][superHeroDetailActivityScreenshot]
 
 
-**Your task as Android Developer for this kata is to write all the UI tests needed to check if the Application UI is working as should.** The application architecture, dependencies and configuration is ready to just start writing tests. In this project you'll find a Dagger2 configured to be able to replace production code with test doubles easily and Espresso to be able to interact with the application user interface.
+**Your task as Android Developer for this kata is to write all the UI tests needed to check if the Application UI is working as should. The application architecture, dependencies and configuration is ready to just start writing tests. In this project you'll find a Dagger2 configured to be able to replace production code with test doubles easily and Espresso to be able to interact with the application user interface.**
 
-Before to start execute the application and explore it manually and review the application code to design your test scenarios.
+Before to start, execute the application, explore it manually and review the code to design your test scenarios.
 
 ---
 
