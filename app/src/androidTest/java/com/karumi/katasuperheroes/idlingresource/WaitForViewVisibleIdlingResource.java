@@ -36,7 +36,7 @@ public class WaitForViewVisibleIdlingResource implements IdlingResource {
 
   @Override public boolean isIdleNow() {
     View view = activity.findViewById(viewId);
-    return view.getVisibility() == View.VISIBLE;
+    return view.isShown();
   }
 
   @Override public void registerIdleTransitionCallback(ResourceCallback callback) {

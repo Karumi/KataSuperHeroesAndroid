@@ -19,6 +19,7 @@ package com.karumi.katasuperheroes;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -30,11 +31,14 @@ import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.ui.view.SuperHeroDetailActivity;
 import it.cosenonjaviste.daggermock.DaggerMockRule;
+import java.util.List;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
+import static android.support.test.espresso.Espresso.getIdlingResources;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.registerIdlingResources;
 import static android.support.test.espresso.Espresso.unregisterIdlingResources;
@@ -62,9 +66,16 @@ import static org.mockito.Mockito.when;
           });
 
   @Rule public ActivityTestRule<SuperHeroDetailActivity> activityRule =
-      new IntentsTestRule<>(SuperHeroDetailActivity.class, true, false);
+      new ActivityTestRule<>(SuperHeroDetailActivity.class, true, false);
 
   @Mock SuperHeroesRepository repository;
+
+  @After public void tearDown() {
+    List<IdlingResource> idlingResources = getIdlingResources();
+    for (IdlingResource resource: idlingResources) {
+      unregisterIdlingResources(resource);
+    }
+  }
 
   @Test public void showsSuperHeroNameAsToolbarTitle() {
     SuperHero superHero = givenThereIsASuperHero();
@@ -92,7 +103,6 @@ import static org.mockito.Mockito.when;
 
     onView(allOf(withId(R.id.tv_super_hero_name), withText(superHero.getName()))).check(
         matches(isDisplayed()));
-    unregisterIdlingResources(waitForViewVisible);
   }
 
   @Test public void showsSuperHeroDescription() {
@@ -104,7 +114,6 @@ import static org.mockito.Mockito.when;
     registerIdlingResources(waitForViewVisible);
 
     onView(withText(superHero.getDescription())).check(matches(isDisplayed()));
-    unregisterIdlingResources(waitForViewVisible);
   }
 
   @Test public void doesNotShowAvengersBadgeIfSuperHeroIsNotPartOfTheAvengersTeam() {
