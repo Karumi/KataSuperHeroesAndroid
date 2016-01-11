@@ -16,7 +16,10 @@
 
 package com.karumi.katasuperheroes;
 
+import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
@@ -25,6 +28,7 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
+import com.karumi.katasuperheroes.idlingresource.ViewVisibleIdlingResource;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.recyclerview.RecyclerViewInteraction;
@@ -143,9 +147,12 @@ import static org.mockito.Mockito.when;
   @Test public void showsProgressBarWhileLoadingSuperHeroes() {
     givenSuperHeroesLoadIsSlow();
 
-    startActivity();
+    Activity activity = startActivity();
+    IdlingResource loadingIdleResource = new ViewVisibleIdlingResource(activity, R.id.progress_bar);
+    Espresso.registerIdlingResources(loadingIdleResource);
 
     onView(withId(R.id.progress_bar)).check(matches(isDisplayed()));
+    Espresso.unregisterIdlingResources(loadingIdleResource);
   }
 
   private List<SuperHero> givenThereAreSomeAvengers(int numberOfAvengers) {
@@ -176,13 +183,13 @@ import static org.mockito.Mockito.when;
   private void givenSuperHeroesLoadIsSlow() {
     when(repository.getAll()).thenAnswer(new Answer<Object>() {
       @Override public Object answer(InvocationOnMock invocation) throws Throwable {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         return Collections.<SuperHero>emptyList();
       }
     });
   }
 
-  private void startActivity() {
-    activityRule.launchActivity(null);
+  private MainActivity startActivity() {
+    return activityRule.launchActivity(null);
   }
 }
