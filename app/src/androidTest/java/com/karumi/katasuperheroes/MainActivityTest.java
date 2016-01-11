@@ -184,7 +184,6 @@ import static org.mockito.Mockito.when;
     for (int i = 0; i < numberOfSuperHeroes; i++) {
       String superHeroName = "SuperHero - " + i;
       String superHeroPhoto = "https://i.annihil.us/u/prod/marvel/i/mg/c/60/55b6a28ef24fa.jpg";
-
       String superHeroDescription = "Description Super Hero - " + i;
       SuperHero superHero =
           new SuperHero(superHeroName, superHeroPhoto, avengers, superHeroDescription);
