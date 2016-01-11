@@ -75,8 +75,6 @@ import static org.mockito.Mockito.when;
   @Rule public IntentsTestRule<MainActivity> activityRule =
       new IntentsTestRule<>(MainActivity.class, true, false);
 
-  @Rule public AnimationAwareTestRule mAnimationAwareTestRule = new AnimationAwareTestRule();
-
   @Mock SuperHeroesRepository repository;
 
   @Test public void showsEmptyCaseIfThereAreNoSuperHeroes() {
