@@ -3,12 +3,6 @@ env:
   global:
     - ADB_INSTALL_TIMEOUT=8 # 8 minutes (2 minutes by default)
 
-sudo: false
-cache:
-  directories:
-    - ${TRAVIS_BUILD_DIR}/gradle/caches/
-    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
-
 android:
   components:
     - tools
