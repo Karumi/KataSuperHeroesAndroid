@@ -110,14 +110,14 @@ import static org.mockito.Mockito.when;
   }
 
   @Test public void doesNotShowAvengersBadgeIfSuperHeroIsNotPartOfTheAvengersTeam() {
-    SuperHero superHero = givenThereIsASuperHero();
+    SuperHero superHero = givenThereIsASuperHero(false);
 
     startActivity(superHero);
 
     onView(withId(R.id.iv_avengers_badge)).check(matches(not(isDisplayed())));
   }
 
-  @Test public void showsAvengersBadgeIfSuperHeroIsNotPartOfTheAvengersTeam() {
+  @Test public void showsAvengersBadgeIfSuperHeroIsPartOfTheAvengersTeam() {
     SuperHero superHero = givenAnAvenger();
 
     startActivity(superHero);
