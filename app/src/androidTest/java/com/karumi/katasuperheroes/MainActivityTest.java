@@ -40,8 +40,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class) @LargeTest public class MainActivityTest {
 
-  private static final int ANY_NUMBER_OF_SUPER_HEROES = 10;
-
   @Rule public DaggerMockRule<MainComponent> daggerRule =
       new DaggerMockRule<>(MainComponent.class, new MainModule()).set(
           new DaggerMockRule.ComponentSetter<MainComponent>() {
