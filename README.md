@@ -27,7 +27,7 @@ This Application is based on two Activities:
 
 **Your task as Android Developer is to write all the UI tests needed to check if the Application UI is working as should. The application architecture, dependencies and configuration is ready to just start writing tests. In this project you'll find  ``Dagger2`` configured to be able to replace production code with test doubles easily and Espresso to be able to interact with the application user interface.**
 
-This repository is ready to build the application, pass the checkstyle and your tests in Travis-CI environments. **Our recommendation for this exercise is to fork this repository, checkout to the branch kata-super-heroes** and start testing the application.**
+This repository is ready to build the application, pass the checkstyle and your tests in Travis-CI environments. Our recommendation for this exercise is to fork this repository, checkout to the branch kata-super-heroes** and start testing the application.**
 
 Before to start, execute the application, explore it manually and review the code to design your test scenarios.
 
