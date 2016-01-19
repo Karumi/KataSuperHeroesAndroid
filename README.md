@@ -55,8 +55,7 @@ Our recommendation for this exercise is:
 * A [DaggerMockRule][daggermock] is an utility to let you create [Dagger 2][dagger2] modules dynamically. In this case we are using it to create a new `MainModule` in this testing scope. Instead of returning real objects, this new `MainModule` will returns the mock for `SuperHeroesRepository` defined in this test.
 
 * You will find some utilities to help you test RecyclerViews and Toolbars easily in:
-  ```app/src/androidTest/java/com/karumi/katasuperheroes/matchers``` 
-  ```app/src/androidTest/java/com/karumi/katasuperheroes/recyclerview```
+  ``app/src/androidTest/java/com/karumi/katasuperheroes/matchers`` and ``app/src/androidTest/java/com/karumi/katasuperheroes/recyclerview``.
 
   * `RecyclerViewInteraction`: provides an easy way to apply an Espresso matcher to all of the RecyclerView elements
 
