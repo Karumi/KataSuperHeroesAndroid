@@ -8,7 +8,7 @@
 
 ---
 
-## Tasks
+## Getting started
 
 This repository contains an Android application to show Super Heroes information:
 
@@ -25,12 +25,55 @@ This Application is based on two Activities:
 ![SuperHeroDetailActivityScreenshot][superHeroDetailActivityScreenshot]
 
 
-**Your task as Android Developer is to write all the UI tests needed to check if the Application UI is working as should. The application architecture, dependencies and configuration is ready to just start writing tests. In this project you'll find  ``Dagger2`` configured to be able to replace production code with test doubles easily and Espresso to be able to interact with the application user interface.**
+The application architecture, dependencies and configuration is ready to just start writing tests. In this project you'll find  ``Dagger2`` configured to be able to replace production code with test doubles easily and Espresso to be able to interact with the application user interface.
 
-This repository is ready to build the application, pass the checkstyle and your tests in Travis-CI environments. **Our recommendation for this exercise is to fork this repository, checkout to the brach project-withtout-tests and start testing the application.**
 
-Before to start, execute the application, explore it manually and review the code to design your test scenarios.
+## Tasks
 
+Your task as Android Developer is to **write all the UI tests** needed to check if the Application UI is working as it should. 
+
+**This repository is ready to build the application, pass the checkstyle and your tests in Travis-CI environments.**
+
+
+Our recommendation for this exercise is:
+
+  * Before starting
+    1. Fork this repository.
+    2. Checkout `kata-super-heroes` branch.
+    3. Execute the application, explore it manually and make yourself familiar with the code.
+    4. Execute `MainActivityTest` and watch the only test it contains pass.
+
+  * To help you get started, these are some test cases for `MainActivity`:     
+    1. Setup mocked `SuperHeroesRepository` in `MainActivityTest` to return a list of some Super Heroes.
+    2. Test that RecyclerView is listing the correct number of elements when `SuperHeroesRepository` returns a list of some Super Heroes.
+    3. Test that each of this elements contains the correct Super Hero name.
+
+## Considerations
+
+* If you get stuck, `Master` branch contains already solved tests for `MainActivity` and `SuperHeroDetailActivity`
+
+* A [DaggerMockRule][daggermock] is an utility to let you create [Dagger 2][dagger2] modules dynamically. In this case we are using it to create a new `MainModule` in this testing scope. Instead of returning real objects, this new `MainModule` will returns the mock for `SuperHeroesRepository` defined in this test.
+
+* You will find some utilities to help you test RecyclerViews and Toolbars easily in:
+  ``app/src/androidTest/java/com/karumi/katasuperheroes/matchers`` and ``app/src/androidTest/java/com/karumi/katasuperheroes/recyclerview``.
+
+  * `RecyclerViewInteraction`: provides an easy way to apply an Espresso matcher to all of the RecyclerView elements
+
+	```java
+	
+	RecyclerViewInteraction.onRecyclerView(withId(R.id.recycler_view))
+	.withItems(A_LIST_OF_ITEMS)
+	.check(new RecyclerViewInteraction.ItemViewAssertion() {
+	    @Override
+	    public void check(SuperHero item, View view, NoMatchingViewException e) {
+	        matches(A_MATCHER).check(view, e);
+	    }
+	});
+	```
+  * `RecyclerViewItemsCountMatcher`: a matcher that returns true if RecyclerView contains the expected number of elements.
+
+  * `ToolbarMatcher`: a matcher that returns true if a Toolbar with expected title is found.
+  
 ## Extra Tasks
 
 If you've covered all the application functionality using UI tests try to continue with the following tasks:
@@ -51,7 +94,7 @@ There are some links which can be useful to finish these tasks:
 * [Espresso Idling Resources][espressoIdlingResources]
 * [Espresso Custom Matchers][espressoCustomMatchers]
 * [Finding UI views][findingUIViews]
-* [Espresso Test Toolbat Title][toolbarMatcher]
+* [Espresso Test Toolbar Title][toolbarMatcher]
 
 Data provided by Marvel. © 2016 MARVEL
 
@@ -84,3 +127,5 @@ limitations under the License.
 [espressoCustomMatchers]: http://blog.xebia.com/android-custom-matchers-in-espresso/
 [findingUIViews]: http://www.adavis.info/2015/12/testing-tricks-2-finding-ui-views.html?utm_source=Android+Weekly&utm_campaign=9ed0cecaff-Android_Weekly_186&utm_medium=email&utm_term=0_4eb677ad19-9ed0cecaff-337845529
 [toolbarMatcher]: http://blog.sqisland.com/2015/05/espresso-match-toolbar-title.html
+[daggermock]: https://github.com/fabioCollini/DaggerMock
+
