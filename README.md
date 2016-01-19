@@ -46,13 +46,7 @@ Our recommendation for this exercise is:
   * To help you get started, these are some test cases for `MainActivity`:     
     1. Setup mocked `SuperHeroesRepository` in `MainActivityTest` to return a list of some Super Heroes.
     2. Test that RecyclerView is listing the correct number of elements when `SuperHeroesRepository` returns a list of some Super Heroes.
-    3. Test that each of this elements contains the correct Super Hero name.  
-    4. Test that Avengers Badge icon is displayed in a row if Super Hero item is an Avenger.
-    5. Test empty and loading states are not displayed when elements are returned by the repository.
-    6. Test you can navigate to `SuperHeroDetailActivity` when cliking on a row. 
-
-
-
+    3. Test that each of this elements contains the correct Super Hero name.
 
 ## Considerations
 
