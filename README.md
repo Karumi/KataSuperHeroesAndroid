@@ -65,7 +65,7 @@ Our recommendation for this exercise is:
 	.withItems(A_LIST_OF_ITEMS)
 	.check(new RecyclerViewInteraction.ItemViewAssertion<ITEM_TYPE>() {
 	    @Override
-	    public void check(SuperHero item, View view, NoMatchingViewException e) {
+	    public void check(ITEM_TYPE item, View view, NoMatchingViewException e) {
 	        matches(A_MATCHER).check(view, e);
 	    }
 	});
