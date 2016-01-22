@@ -61,7 +61,7 @@ Our recommendation for this exercise is:
 
 	```java
 	
-	RecyclerViewInteraction.onRecyclerView(withId(R.id.recycler_view))
+	RecyclerViewInteraction.<ITEM_TYPE>onRecyclerView(withId(R.id.recycler_view))
 	.withItems(A_LIST_OF_ITEMS)
 	.check(new RecyclerViewInteraction.ItemViewAssertion() {
 	    @Override
