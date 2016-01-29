@@ -30,7 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
 
   @Nullable @Bind(R.id.toolbar)
   Toolbar toolbar;
-  @Bind(R.id.progress_bar)
+  @Nullable @Bind(R.id.progress_bar)
   View loadingView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
