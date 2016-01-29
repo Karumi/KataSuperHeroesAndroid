@@ -17,25 +17,28 @@
 package com.karumi.katasuperheroes.ui.view;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.ui.presenter.Presenter;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements Presenter.View {
 
-  private Toolbar toolbar;
-  private View loadingView;
+  @Nullable @Bind(R.id.toolbar)
+  Toolbar toolbar;
+  @Bind(R.id.progress_bar)
+  View loadingView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(getLayoutId());
-    initializeToolbar();
-    initializeLoadingView();
     initializeButterKnife();
+    initializeToolbar();
   }
 
   public abstract int getLayoutId();
@@ -52,18 +55,13 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
     }
   }
 
+  private void initializeButterKnife() {
+    ButterKnife.bind(this);
+  }
+
   protected void initializeToolbar() {
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
     if (toolbar != null) {
       setSupportActionBar(toolbar);
     }
-  }
-
-  protected void initializeLoadingView() {
-    loadingView = findViewById(R.id.progress_bar);
-  }
-
-  private void initializeButterKnife() {
-    ButterKnife.bind(this);
   }
 }
