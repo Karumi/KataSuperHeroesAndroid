@@ -20,12 +20,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.SuperHeroesApplication;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.ui.presenter.SuperHeroesPresenter;
 
 import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
