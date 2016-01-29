@@ -22,15 +22,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.SuperHeroesApplication;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.ui.presenter.SuperHeroDetailPresenter;
 import com.squareup.picasso.Picasso;
-
 import javax.inject.Inject;
-
 import butterknife.Bind;
 
 public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDetailPresenter.View {

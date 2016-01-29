@@ -23,7 +23,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.ui.presenter.Presenter;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

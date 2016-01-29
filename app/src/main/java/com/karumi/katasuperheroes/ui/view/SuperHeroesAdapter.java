@@ -20,11 +20,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.ui.presenter.SuperHeroesPresenter;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
