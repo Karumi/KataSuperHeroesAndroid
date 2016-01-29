@@ -23,6 +23,8 @@ import android.view.View;
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.ui.presenter.Presenter;
 
+import butterknife.ButterKnife;
+
 public abstract class BaseActivity extends AppCompatActivity implements Presenter.View {
 
   private Toolbar toolbar;
@@ -33,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
     setContentView(getLayoutId());
     initializeToolbar();
     initializeLoadingView();
+    initializeButterKnife();
   }
 
   public abstract int getLayoutId();
@@ -58,5 +61,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
 
   protected void initializeLoadingView() {
     loadingView = findViewById(R.id.progress_bar);
+  }
+
+  private void initializeButterKnife() {
+    ButterKnife.bind(this);
   }
 }

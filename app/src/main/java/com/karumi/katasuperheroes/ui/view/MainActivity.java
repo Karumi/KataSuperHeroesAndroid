@@ -28,18 +28,23 @@ import com.karumi.katasuperheroes.ui.presenter.SuperHeroesPresenter;
 import java.util.List;
 import javax.inject.Inject;
 
+import butterknife.Bind;
+
 public class MainActivity extends BaseActivity implements SuperHeroesPresenter.View {
 
   @Inject SuperHeroesPresenter presenter;
 
   private SuperHeroesAdapter adapter;
-  private View emptyCaseView;
+
+  @Bind(R.id.tv_empty_case)
+  View emptyCaseView;
+  @Bind(R.id.recycler_view)
+  RecyclerView recyclerView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     initializeDagger();
     initializePresenter();
-    initializeEmptyCaseView();
     initializeAdapter();
     initializeRecyclerView();
     presenter.initialize();
@@ -66,10 +71,6 @@ public class MainActivity extends BaseActivity implements SuperHeroesPresenter.V
     emptyCaseView.setVisibility(View.GONE);
   }
 
-  private void initializeEmptyCaseView() {
-    emptyCaseView = findViewById(R.id.tv_empty_case);
-  }
-
   private void initializeDagger() {
     SuperHeroesApplication app = (SuperHeroesApplication) getApplication();
     app.getMainComponent().inject(this);
@@ -84,7 +85,6 @@ public class MainActivity extends BaseActivity implements SuperHeroesPresenter.V
   }
 
   private void initializeRecyclerView() {
-    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(adapter);
