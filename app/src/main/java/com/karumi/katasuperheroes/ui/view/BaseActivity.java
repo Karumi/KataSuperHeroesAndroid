@@ -35,6 +35,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
     initializeLoadingView();
   }
 
+  
+
   public abstract int getLayoutId();
 
   @Override public void showLoading() {
