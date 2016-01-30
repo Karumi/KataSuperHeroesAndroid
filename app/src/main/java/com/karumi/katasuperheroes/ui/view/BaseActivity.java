@@ -34,7 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Presente
     initializeToolbar();
     initializeLoadingView();
   }
-
   
 
   public abstract int getLayoutId();
