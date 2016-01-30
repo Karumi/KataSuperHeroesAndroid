@@ -34,10 +34,8 @@ public class MainActivity extends BaseActivity implements SuperHeroesPresenter.V
 
   private SuperHeroesAdapter adapter;
 
-  @Bind(R.id.tv_empty_case)
-  View emptyCaseView;
-  @Bind(R.id.recycler_view)
-  RecyclerView recyclerView;
+  @Bind(R.id.tv_empty_case) View emptyCaseView;
+  @Bind(R.id.recycler_view) RecyclerView recyclerView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

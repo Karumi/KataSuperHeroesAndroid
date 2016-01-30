@@ -28,10 +28,8 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements Presenter.View {
 
-  @Nullable @Bind(R.id.toolbar)
-  Toolbar toolbar;
-  @Nullable @Bind(R.id.progress_bar)
-  View loadingView;
+  @Nullable @Bind(R.id.toolbar) Toolbar toolbar;
+  @Nullable @Bind(R.id.progress_bar) View loadingView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

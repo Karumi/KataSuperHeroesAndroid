@@ -36,14 +36,10 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
 
   @Inject SuperHeroDetailPresenter presenter;
 
-  @Bind(R.id.iv_super_hero_photo)
-  ImageView superHeroPhotoImageView;
-  @Bind(R.id.tv_super_hero_name)
-  TextView superHeroNameTextView;
-  @Bind(R.id.tv_super_hero_description)
-  TextView superHeroDescriptionTextView;
-  @Bind(R.id.iv_avengers_badge)
-  View avengersBadgeView;
+  @Bind(R.id.iv_super_hero_photo) ImageView superHeroPhotoImageView;
+  @Bind(R.id.tv_super_hero_name) TextView superHeroNameTextView;
+  @Bind(R.id.tv_super_hero_description) TextView superHeroDescriptionTextView;
+  @Bind(R.id.iv_avengers_badge) View avengersBadgeView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
