@@ -20,22 +20,28 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
+
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.ui.view.MainActivity;
-import it.cosenonjaviste.daggermock.DaggerMockRule;
-import java.util.Collections;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
+import java.util.Arrays;
+import java.util.Collections;
+
+import it.cosenonjaviste.daggermock.DaggerMockRule;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.core.IsNot.not;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class) @LargeTest public class MainActivityTest {
@@ -64,6 +70,17 @@ import static org.mockito.Mockito.when;
 
     onView(withText("¯\\_(ツ)_/¯")).check(matches(isDisplayed()));
   }
+
+  @Test public void showsEmptyCaseWhenThereAreSuperHeroes(){
+    givenThereAreSomeSuperHeroes();
+    startActivity();
+    onView(withText("¯\\_(ツ)_/¯")).check(matches(not(isDisplayed())));
+  }
+
+  private void givenThereAreSomeSuperHeroes(){
+    when(repository.getAll()).thenReturn(Arrays.asList(new SuperHero("Pepito",null,false,"la polla con cebolla")));
+  }
+
 
   private void givenThereAreNoSuperHeroes() {
     when(repository.getAll()).thenReturn(Collections.<SuperHero>emptyList());
