@@ -20,7 +20,7 @@ This Application is based on two Activities:
 
 ![MainActivityScreenhot][mainActivityScreenshot]
 
-* ``SuperHeroDetailActivity`` showing detailed information for a super hero like the name, photo and description.
+* ``SuperHeroDetailActivity`` showing detailed information about a super hero like his or her name, photo and description.
 
 ![SuperHeroDetailActivityScreenshot][superHeroDetailActivityScreenshot]
 
@@ -61,11 +61,11 @@ Our recommendation for this exercise is:
 
 	```java
 	
-	RecyclerViewInteraction.onRecyclerView(withId(R.id.recycler_view))
+	RecyclerViewInteraction.<ITEM_TYPE>onRecyclerView(withId(R.id.recycler_view))
 	.withItems(A_LIST_OF_ITEMS)
-	.check(new RecyclerViewInteraction.ItemViewAssertion() {
+	.check(new RecyclerViewInteraction.ItemViewAssertion<ITEM_TYPE>() {
 	    @Override
-	    public void check(SuperHero item, View view, NoMatchingViewException e) {
+	    public void check(ITEM_TYPE item, View view, NoMatchingViewException e) {
 	        matches(A_MATCHER).check(view, e);
 	    }
 	});
