@@ -20,7 +20,7 @@ This Application is based on two Activities:
 
 ![MainActivityScreenhot][mainActivityScreenshot]
 
-* ``SuperHeroDetailActivity`` showing detailed information for a super hero like the name, photo and description.
+* ``SuperHeroDetailActivity`` showing detailed information about a super hero like his or her name, photo and description.
 
 ![SuperHeroDetailActivityScreenshot][superHeroDetailActivityScreenshot]
 

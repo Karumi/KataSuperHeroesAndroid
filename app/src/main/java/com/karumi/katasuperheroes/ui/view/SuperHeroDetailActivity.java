@@ -28,6 +28,7 @@ import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.ui.presenter.SuperHeroDetailPresenter;
 import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
+import butterknife.Bind;
 
 public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDetailPresenter.View {
 
@@ -35,15 +36,14 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
 
   @Inject SuperHeroDetailPresenter presenter;
 
-  private ImageView superHeroPhotoImageView;
-  private TextView superHeroNameTextView;
-  private TextView superHeroDescriptionTextView;
-  private View avengersBadgeView;
+  @Bind(R.id.iv_super_hero_photo) ImageView superHeroPhotoImageView;
+  @Bind(R.id.tv_super_hero_name) TextView superHeroNameTextView;
+  @Bind(R.id.tv_super_hero_description) TextView superHeroDescriptionTextView;
+  @Bind(R.id.iv_avengers_badge) View avengersBadgeView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     initializeDagger();
-    initializeSuperHeroView();
     initializePresenter();
   }
 
@@ -74,13 +74,6 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
   private void initializeDagger() {
     SuperHeroesApplication app = (SuperHeroesApplication) getApplication();
     app.getMainComponent().inject(this);
-  }
-
-  private void initializeSuperHeroView() {
-    superHeroPhotoImageView = (ImageView) findViewById(R.id.iv_super_hero_photo);
-    superHeroNameTextView = (TextView) findViewById(R.id.tv_super_hero_name);
-    superHeroDescriptionTextView = (TextView) findViewById(R.id.tv_super_hero_description);
-    avengersBadgeView = findViewById(R.id.iv_avengers_badge);
   }
 
   private void initializePresenter() {
