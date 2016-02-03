@@ -127,13 +127,6 @@ import static org.mockito.Mockito.when;
 
   }
 
-  @Test public void detailActivityHasToolbarTitle(){
-    List superheroe = giverNSuperHeroes(1);
-
-
-  }
-
-
 
 
 
