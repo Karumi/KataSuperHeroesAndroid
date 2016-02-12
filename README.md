@@ -1,4 +1,4 @@
-![Karumi logo][karumilogo] KataSuperHeroes for Android. [![Build Status](https://travis-ci.org/Karumi/KataSuperHeroesAndroid.svg?branch=kata-super-heroes)](https://travis-ci.org/Karumi/KataSuperHeroesAndroid)
+![Karumi logo][karumilogo] KataSuperHeroes for Android. [![Build Status](https://travis-ci.org/Karumi/KataSuperHeroesAndroid.svg?branch=master)](https://travis-ci.org/Karumi/KataSuperHeroesAndroid)
 ============================
 
 - We are here to practice UI Testing.
