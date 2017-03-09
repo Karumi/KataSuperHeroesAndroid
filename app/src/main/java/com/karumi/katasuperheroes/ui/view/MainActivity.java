@@ -19,15 +19,23 @@ package com.karumi.katasuperheroes.ui.view;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import butterknife.Bind;
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.SuperHeroesApplication;
 import com.karumi.katasuperheroes.model.SuperHero;
+import com.karumi.marvelapiclient.CharacterApiClient;
+import com.karumi.marvelapiclient.MarvelApiConfig;
+import com.karumi.marvelapiclient.MarvelApiException;
+import com.karumi.marvelapiclient.model.CharactersDto;
+import com.karumi.marvelapiclient.model.CharactersQuery;
+import com.karumi.marvelapiclient.model.MarvelResponse;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
+  public static final String LOGTAG = "MainActivity";
   private SuperHeroesAdapter adapter;
 
   @Bind(R.id.tv_empty_case) View emptyCaseView;
@@ -38,6 +46,25 @@ public class MainActivity extends BaseActivity {
     initializeDagger();
     initializeAdapter();
     initializeRecyclerView();
+  }
+
+  @Override protected void onResume() {
+    super.onResume();
+    new Thread(new Runnable() {
+      @Override public void run() {
+        MarvelApiConfig marvelApiConfig =
+            new MarvelApiConfig.Builder("bf1f5d5f088f59478a3f68324fd1face",
+                "d3fa0b1bad53d48b8bac7b9d4a02a860d24caca0").debug().build();
+        CharacterApiClient characterApiClient = new CharacterApiClient(marvelApiConfig);
+        CharactersQuery spider = CharactersQuery.Builder.create().withOffset(0).withLimit(10).build();
+        try {
+          MarvelResponse<CharactersDto> all = characterApiClient.getAll(spider);
+          Log.d(LOGTAG, "Characters downloaded = " + all.getResponse().getCharacters().size());
+        } catch (MarvelApiException e) {
+          Log.e(LOGTAG, "Exception catch trying to download some characters from the Marvel API", e);
+        }
+      }
+    }).start();
   }
 
   @Override public int getLayoutId() {
