@@ -22,18 +22,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.model.SuperHero;
-import com.karumi.katasuperheroes.ui.presenter.SuperHeroesPresenter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-  private final SuperHeroesPresenter presenter;
   private final List<SuperHero> superHeroes;
 
-  public SuperHeroesAdapter(SuperHeroesPresenter presenter) {
-    this.presenter = presenter;
+  public SuperHeroesAdapter() {
     this.superHeroes = new ArrayList<>();
   }
 
@@ -44,7 +41,7 @@ class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View view =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.super_hero_row, parent, false);
-    return new SuperHeroViewHolder(view, presenter);
+    return new SuperHeroViewHolder(view);
   }
 
   @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {

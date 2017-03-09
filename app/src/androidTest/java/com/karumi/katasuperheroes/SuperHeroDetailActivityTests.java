@@ -25,7 +25,6 @@ import android.test.suitebuilder.annotation.LargeTest;
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
 import com.karumi.katasuperheroes.model.SuperHero;
-import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.ui.view.SuperHeroDetailActivity;
 import it.cosenonjaviste.daggermock.DaggerMockRule;
 import java.util.List;
@@ -64,8 +63,6 @@ import static org.mockito.Mockito.when;
 
   @Rule public ActivityTestRule<SuperHeroDetailActivity> activityRule =
       new ActivityTestRule<>(SuperHeroDetailActivity.class, true, false);
-
-  @Mock SuperHeroesRepository repository;
 
   @After public void tearDown() {
     List<IdlingResource> idlingResources = getIdlingResources();
@@ -139,7 +136,6 @@ import static org.mockito.Mockito.when;
     String superHeroDescription = "Super Hero Description";
     SuperHero superHero =
         new SuperHero(superHeroName, superHeroPhoto, isAvenger, superHeroDescription);
-    when(repository.getByName(superHeroName)).thenReturn(superHero);
     return superHero;
   }
 

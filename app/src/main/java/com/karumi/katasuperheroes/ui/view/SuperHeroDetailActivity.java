@@ -22,19 +22,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.Bind;
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.SuperHeroesApplication;
 import com.karumi.katasuperheroes.model.SuperHero;
-import com.karumi.katasuperheroes.ui.presenter.SuperHeroDetailPresenter;
 import com.squareup.picasso.Picasso;
-import javax.inject.Inject;
-import butterknife.Bind;
 
-public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDetailPresenter.View {
+public class SuperHeroDetailActivity extends BaseActivity {
 
   private static final String SUPER_HERO_NAME_KEY = "super_hero_name_key";
-
-  @Inject SuperHeroDetailPresenter presenter;
 
   @Bind(R.id.iv_super_hero_photo) ImageView superHeroPhotoImageView;
   @Bind(R.id.tv_super_hero_name) TextView superHeroNameTextView;
@@ -44,14 +40,13 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     initializeDagger();
-    initializePresenter();
   }
 
   @Override public int getLayoutId() {
     return R.layout.super_hero_detail_activity;
   }
 
-  @Override public void showSuperHero(SuperHero superHero) {
+  public void showSuperHero(SuperHero superHero) {
     Picasso.with(this).load(superHero.getPhoto()).fit().centerCrop().into(superHeroPhotoImageView);
     superHeroNameTextView.setText(superHero.getName());
     superHeroDescriptionTextView.setText(superHero.getDescription());
@@ -74,13 +69,6 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
   private void initializeDagger() {
     SuperHeroesApplication app = (SuperHeroesApplication) getApplication();
     app.getMainComponent().inject(this);
-  }
-
-  private void initializePresenter() {
-    presenter.setView(this);
-    String name = getSuperHeroName();
-    presenter.setName(name);
-    presenter.initialize();
   }
 
   private String getSuperHeroName() {

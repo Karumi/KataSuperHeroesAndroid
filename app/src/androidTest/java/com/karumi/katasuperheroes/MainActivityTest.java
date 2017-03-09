@@ -27,7 +27,6 @@ import android.view.View;
 import com.karumi.katasuperheroes.di.MainComponent;
 import com.karumi.katasuperheroes.di.MainModule;
 import com.karumi.katasuperheroes.model.SuperHero;
-import com.karumi.katasuperheroes.model.SuperHeroesRepository;
 import com.karumi.katasuperheroes.recyclerview.RecyclerViewInteraction;
 import com.karumi.katasuperheroes.ui.view.MainActivity;
 import com.karumi.katasuperheroes.ui.view.SuperHeroDetailActivity;
@@ -74,8 +73,6 @@ import static org.mockito.Mockito.when;
 
   @Rule public IntentsTestRule<MainActivity> activityRule =
       new IntentsTestRule<>(MainActivity.class, true, false);
-
-  @Mock SuperHeroesRepository repository;
 
   @Test public void showsEmptyCaseIfThereAreNoSuperHeroes() {
     givenThereAreNoSuperHeroes();
@@ -188,14 +185,12 @@ import static org.mockito.Mockito.when;
       SuperHero superHero =
           new SuperHero(superHeroName, superHeroPhoto, avengers, superHeroDescription);
       superHeroes.add(superHero);
-      when(repository.getByName(superHeroName)).thenReturn(superHero);
     }
-    when(repository.getAll()).thenReturn(superHeroes);
     return superHeroes;
   }
 
   private void givenThereAreNoSuperHeroes() {
-    when(repository.getAll()).thenReturn(Collections.<SuperHero>emptyList());
+    givenThereAreSomeSuperHeroes(0, false);
   }
 
   private MainActivity startActivity() {

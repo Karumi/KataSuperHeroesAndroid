@@ -20,17 +20,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import butterknife.Bind;
 import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.SuperHeroesApplication;
 import com.karumi.katasuperheroes.model.SuperHero;
-import com.karumi.katasuperheroes.ui.presenter.SuperHeroesPresenter;
 import java.util.List;
-import javax.inject.Inject;
-import butterknife.Bind;
 
-public class MainActivity extends BaseActivity implements SuperHeroesPresenter.View {
-
-  @Inject SuperHeroesPresenter presenter;
+public class MainActivity extends BaseActivity {
 
   private SuperHeroesAdapter adapter;
 
@@ -40,30 +36,28 @@ public class MainActivity extends BaseActivity implements SuperHeroesPresenter.V
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     initializeDagger();
-    initializePresenter();
     initializeAdapter();
     initializeRecyclerView();
-    presenter.initialize();
   }
 
   @Override public int getLayoutId() {
     return R.layout.main_activity;
   }
 
-  @Override public void showSuperHeroes(List<SuperHero> superHeroes) {
+  public void showSuperHeroes(List<SuperHero> superHeroes) {
     adapter.addAll(superHeroes);
     adapter.notifyDataSetChanged();
   }
 
-  @Override public void openSuperHeroScreen(SuperHero superHero) {
+  public void openSuperHeroScreen(SuperHero superHero) {
     SuperHeroDetailActivity.open(this, superHero.getName());
   }
 
-  @Override public void showEmptyCase() {
+  public void showEmptyCase() {
     emptyCaseView.setVisibility(View.VISIBLE);
   }
 
-  @Override public void hideEmptyCase() {
+  public void hideEmptyCase() {
     emptyCaseView.setVisibility(View.GONE);
   }
 
@@ -72,12 +66,8 @@ public class MainActivity extends BaseActivity implements SuperHeroesPresenter.V
     app.getMainComponent().inject(this);
   }
 
-  private void initializePresenter() {
-    presenter.setView(this);
-  }
-
   private void initializeAdapter() {
-    adapter = new SuperHeroesAdapter(presenter);
+    adapter = new SuperHeroesAdapter();
   }
 
   private void initializeRecyclerView() {
