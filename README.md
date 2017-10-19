@@ -1,4 +1,4 @@
-![Karumi logo][karumilogo] KataSuperHeroes for Android. [![Build Status](https://travis-ci.org/Karumi/KataSuperHeroesAndroid.svg?branch=master)](https://travis-ci.org/Karumi/KataSuperHeroesAndroid)
+![Karumi logo][karumilogo] KataSuperHeroes for Android [![Build Status](https://travis-ci.org/Karumi/KataSuperHeroesAndroid.svg?branch=master)](https://travis-ci.org/Karumi/KataSuperHeroesAndroid)
 ============================
 
 - We are here to practice UI Testing.
@@ -89,6 +89,7 @@ If you've covered all the application functionality using UI tests try to contin
 
 There are some links which can be useful to finish these tasks:
 
+* [Kata Super Heroes in Kotlin][kataSuperHeroesKotlin]
 * [Android Testing Support Library official documentation][androidTestingDocumentation]
 * [Espresso Cheat Sheet][espressoCheatSheet]
 * [Espresso Idling Resources][espressoIdlingResources]
@@ -128,4 +129,4 @@ limitations under the License.
 [findingUIViews]: http://www.adavis.info/2015/12/testing-tricks-2-finding-ui-views.html?utm_source=Android+Weekly&utm_campaign=9ed0cecaff-Android_Weekly_186&utm_medium=email&utm_term=0_4eb677ad19-9ed0cecaff-337845529
 [toolbarMatcher]: http://blog.sqisland.com/2015/05/espresso-match-toolbar-title.html
 [daggermock]: https://github.com/fabioCollini/DaggerMock
-
+[kataSuperHeroesKotlin]: https://github.com/Karumi/KataSuperHeroesKotlin
