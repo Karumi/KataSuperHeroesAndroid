@@ -116,14 +116,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 [karumilogo]: https://cloud.githubusercontent.com/assets/858090/11626547/e5a1dc66-9ce3-11e5-908d-537e07e82090.png
-[espresso]: https://google.github.io/android-testing-support-library/docs/
+[espresso]: https://developer.android.com/training/testing/espresso
 [dagger2]: http://google.github.io/dagger/
 [testDoubles]: http://www.martinfowler.com/bliki/TestDouble.html
 [applicationScreencast]: ./art/ApplicationScreencast.gif
 [mainActivityScreenshot]: ./art/MainActivityScreenshot.png
 [superHeroDetailActivityScreenshot]: ./art/SuperHeroDetailActivityScreenshot.png
-[androidTestingDocumentation]: https://google.github.io/android-testing-support-library
-[espressoCheatSheet]: https://google.github.io/android-testing-support-library/docs/espresso/cheatsheet/index.html
+[androidTestingDocumentation]: https://developer.android.com/training/testing/
+[espressoCheatSheet]: https://developer.android.com/training/testing/espresso/cheat-sheet
 [espressoIdlingResources]: http://dev.jimdo.com/2014/05/09/wait-for-it-a-deep-dive-into-espresso-s-idling-resources/
 [espressoCustomMatchers]: http://blog.xebia.com/android-custom-matchers-in-espresso/
 [findingUIViews]: http://www.adavis.info/2015/12/testing-tricks-2-finding-ui-views.html?utm_source=Android+Weekly&utm_campaign=9ed0cecaff-Android_Weekly_186&utm_medium=email&utm_term=0_4eb677ad19-9ed0cecaff-337845529
