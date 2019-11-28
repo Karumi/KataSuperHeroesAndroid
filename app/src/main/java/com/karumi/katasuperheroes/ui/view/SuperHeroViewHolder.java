@@ -24,15 +24,15 @@ import com.karumi.katasuperheroes.R;
 import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.ui.presenter.SuperHeroesPresenter;
 import com.squareup.picasso.Picasso;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SuperHeroViewHolder extends RecyclerView.ViewHolder {
 
     private final SuperHeroesPresenter presenter;
-    @Bind(R.id.iv_super_hero_photo) ImageView photoImageView;
-    @Bind(R.id.tv_super_hero_name) TextView nameTextView;
-    @Bind(R.id.iv_avengers_badge) View avengersBadgeView;
+    @BindView(R.id.iv_super_hero_photo) ImageView photoImageView;
+    @BindView(R.id.tv_super_hero_name) TextView nameTextView;
+    @BindView(R.id.iv_avengers_badge) View avengersBadgeView;
 
     public SuperHeroViewHolder(View itemView, SuperHeroesPresenter presenter) {
         super(itemView);

@@ -28,7 +28,7 @@ import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.ui.presenter.SuperHeroDetailPresenter;
 import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDetailPresenter.View {
 
@@ -36,10 +36,10 @@ public class SuperHeroDetailActivity extends BaseActivity implements SuperHeroDe
 
   @Inject SuperHeroDetailPresenter presenter;
 
-  @Bind(R.id.iv_super_hero_photo) ImageView superHeroPhotoImageView;
-  @Bind(R.id.tv_super_hero_name) TextView superHeroNameTextView;
-  @Bind(R.id.tv_super_hero_description) TextView superHeroDescriptionTextView;
-  @Bind(R.id.iv_avengers_badge) View avengersBadgeView;
+  @BindView(R.id.iv_super_hero_photo) ImageView superHeroPhotoImageView;
+  @BindView(R.id.tv_super_hero_name) TextView superHeroNameTextView;
+  @BindView(R.id.tv_super_hero_description) TextView superHeroDescriptionTextView;
+  @BindView(R.id.iv_avengers_badge) View avengersBadgeView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

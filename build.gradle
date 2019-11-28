@@ -1,9 +1,11 @@
 buildscript {
   repositories {
     jcenter()
+    mavenCentral()
+    google()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:1.5.0'
+    classpath 'com.android.tools.build:gradle:3.5.3'
   }
 }
 
@@ -11,6 +13,7 @@ allprojects {
   repositories {
     jcenter()
     maven { url "https://jitpack.io" }
+    google()
   }
 
   apply plugin: 'checkstyle'

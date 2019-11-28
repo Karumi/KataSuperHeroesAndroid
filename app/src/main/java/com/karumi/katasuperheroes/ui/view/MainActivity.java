@@ -26,7 +26,7 @@ import com.karumi.katasuperheroes.model.SuperHero;
 import com.karumi.katasuperheroes.ui.presenter.SuperHeroesPresenter;
 import java.util.List;
 import javax.inject.Inject;
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements SuperHeroesPresenter.View {
 
@@ -34,8 +34,8 @@ public class MainActivity extends BaseActivity implements SuperHeroesPresenter.V
 
   private SuperHeroesAdapter adapter;
 
-  @Bind(R.id.tv_empty_case) View emptyCaseView;
-  @Bind(R.id.recycler_view) RecyclerView recyclerView;
+  @BindView(R.id.tv_empty_case) View emptyCaseView;
+  @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
