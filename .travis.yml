@@ -5,7 +5,7 @@ env:
 
 android:
   components:
-    - android-26
+    - android-19
     - tools
     - build-tools-28.0.3
     - android-28
@@ -15,7 +15,7 @@ android:
     - sys-img-armeabi-v7a-android-19
 
 before_script:
-  - echo no | android create avd --force -n test -t android-26 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell settings put global window_animation_scale 0 &

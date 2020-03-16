@@ -11,8 +11,8 @@ android {
   compileSdkVersion 28
   defaultConfig {
     applicationId 'com.karumi.katasuperheroes'
-    minSdkVersion 26
-    targetSdkVersion 26
+    minSdkVersion 19
+    targetSdkVersion 28
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -24,6 +24,10 @@ android {
   }
   lintOptions {
     abortOnError false
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
   }
 }
 
