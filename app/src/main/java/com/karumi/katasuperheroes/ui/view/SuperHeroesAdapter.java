@@ -32,7 +32,7 @@ class SuperHeroesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   private final SuperHeroesPresenter presenter;
   private final List<SuperHero> superHeroes;
 
-  public SuperHeroesAdapter(SuperHeroesPresenter presenter) {
+  SuperHeroesAdapter(SuperHeroesPresenter presenter) {
     this.presenter = presenter;
     this.superHeroes = new ArrayList<>();
   }
